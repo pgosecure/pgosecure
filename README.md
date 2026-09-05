@@ -123,7 +123,7 @@ password-generator/
 
 ```bash
 # Clona el repositorio
-git clone https://github.com/TU-USUARIO/password-generator.git
+git clone https://github.com/pgosecure/pgosecure.git
 
 # Abre index.html en tu navegador
 # (no necesita servidor — funciona directamente como archivo local)
@@ -147,7 +147,7 @@ MIT License — usa, modifica y distribuye libremente.
 
 Las contribuciones son bienvenidas. Puedes:
 
-- Abrir un [Issue](https://github.com/TU-USUARIO/password-generator/issues) para reportar bugs
+- Abrir un [Issue](https://github.com/pgosecure/pgosecure/issues) para reportar bugs
 - Proponer nuevas funcionalidades
 - Enviar un Pull Request
 
