@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad | PGOsecure — Generador de Contraseñas</title>
+    <meta name="description" content="Política de privacidad de PGOsecure según el RGPD: qué datos se tratan, qué datos NO se tratan, finalidades, base legal, cesiones a terceros y derechos del usuario.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pgosecure.netlify.app/politica-privacidad.html">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #05080f; --bg2: #0b1220; --bg3: #111a2b;
+            --text: #e9eef7; --text2: #96a3bb; --text3: #5d6b85;
+            --accent: #6366f1; --accent2: #9aa6ff;
+            --success: #34d399;
+            --border: rgba(148,163,184,0.09); --border2: rgba(148,163,184,0.18);
+            --r: 16px; --r2: 12px; --r3: 10px;
+            --shadow: 0 12px 40px rgba(0,0,0,0.55);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        body::before{content:'';position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#6366f1 0%,#22d3ee 50%,#34d399 100%);z-index:300;pointer-events:none;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;padding:0 16px;}
+        .wrap{max-width:720px;margin:0 auto;padding:48px 0 80px;}
+        .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);}
+        .back{display:inline-flex;align-items:center;gap:6px;color:var(--accent2);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:24px;}
+        .back:hover{text-decoration:underline;}
+        h1{font-size:26px;font-weight:800;margin-bottom:6px;letter-spacing:-0.02em;}
+        .updated{font-size:12px;color:var(--text3);margin-bottom:24px;}
+        h2{font-size:16px;font-weight:700;margin-top:28px;margin-bottom:10px;color:var(--text);}
+        p,li{font-size:14px;color:var(--text2);margin-bottom:10px;}
+        ul{padding-left:22px;margin-bottom:10px;}
+        li{margin-bottom:4px;}
+        strong{color:var(--text);}
+        .placeholder{background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#fbbf24;border-radius:4px;padding:1px 6px;font-family:monospace;font-size:13px;}
+        .note{background:rgba(34,197,94,0.08);border-left:4px solid var(--success);border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;}
+        .note p{margin-bottom:0;color:var(--text2);}
+        .footer{text-align:center;padding:28px 0 40px;color:var(--text3);font-size:12px;}
+        .footer a{color:var(--accent2);text-decoration:none;}
+        @media(max-width:520px){ .card{padding:24px;} }
+        /* === NETLIFY BADGE — tema oscuro === */
+        .netlify-badge,
+        a[href*="netlify.com"][href*="badge"],
+        a[rel="noopener"][href*="netlify"],
+        .snip-a05640a737982,
+        [data-testid="netlify-badge"]{
+            background: var(--bg2) !important;
+            color: var(--text2) !important;
+            border: 1px solid var(--border2) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+            font-family: var(--font) !important;
+        }
+        .netlify-badge:hover,
+        a[href*="netlify.com"][href*="badge"]:hover,
+        a[rel="noopener"][href*="netlify"]:hover,
+        .snip-a05640a737982:hover,
+        [data-testid="netlify-badge"]:hover{
+            background: var(--bg3) !important;
+            color: var(--text) !important;
+            border-color: var(--accent) !important;
+        }
+        .netlify-badge img,
+        a[href*="netlify.com"] img,
+        .snip-a05640a737982 img,
+        [data-testid="netlify-badge"] img{
+            filter: brightness(0) invert(1) !important;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <a class="back" href="index.html">&larr; Volver al generador</a>
+    <div class="card">
+        <h1>Política de Privacidad</h1>
+        <p class="updated">Última actualización: 5 de septiembre de 2026</p>
+
+        <h2>1. Responsable del tratamiento</h2>
+        <p>En cumplimiento del <strong>Reglamento (UE) 2016/679 (RGPD)</strong> y de la <strong>Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD)</strong>, se informa al usuario:</p>
+        <ul>
+            <li><strong>Responsable:</strong> PGOsecure (seudónimo)</li>
+            <li><strong>Contacto:</strong> <a href="mailto:PGOsecure@gmail.com">PGOsecure@gmail.com</a></li>
+            <li><strong>Dominio:</strong> pgosecure.netlify.app</li>
+        </ul>
+
+        <h2>2. Compromiso fundamental: no recopilamos contraseñas</h2>
+        <div class="note">
+            <p><strong>Tus contraseñas NUNCA salen de tu navegador.</strong> Las contraseñas generadas o introducidas en esta web se procesan íntegramente en tu dispositivo mediante la Web Crypto API. Como principio de diseño (<em>"privacy by design"</em>), esta web <strong>no recopila, no almacena, no transmite ni comparte ninguna contraseña</strong>, ni en servidores propios ni de terceros. Si no hay datos, no hay datos que proteger.</p>
+        </div>
+
+        <h2>3. Datos que SÍ se tratan y base legal</h2>
+        <p>Esta web trata un conjunto mínimo de datos, siempre con base legal conforme al <strong>artículo 6 del RGPD</strong>:</p>
+        <ul>
+            <li><strong>Datos almacenados en tu propio navegador (localStorage) — Art. 6.1.a (consentimiento) / interés no personal:</strong> historial de contraseñas generadas, favoritos y preferencia de tema (claro/oscuro). Estos datos permanecen <strong>exclusivamente en tu dispositivo</strong> y <strong>no se transmiten a ningún servidor</strong>. Puedes borrarlos en cualquier momento desde el propio historial de la web o las herramientas de navegador.</li>
+            <li><strong>Preferencia de consentimiento de cookies (localStorage) — Art. 6.1.c (obligación legal):</strong> un valor técnico (<code>[sp_cookie_consent]</code>) que registra si has aceptado o rechazado las cookies de publicidad de terceros, tal y como exige la normativa de cookies (LSSI y Directiva 2002/58/CE).</li>
+            <li><strong>Datos de conexión (IP, logs del servidor) — Art. 6.1.f (interés legítimo):</strong> el proveedor de hosting trata de forma automática y temporal los datos técnicos de conexión (dirección IP, fecha y hora de acceso) con fines de seguridad y mantenimiento. No utilizamos estos datos para elaborar perfiles.</li>
+            <li><strong>Cookies de publicidad de terceros (Google AdSense) — Art. 6.1.a (consentimiento):</strong> únicamente si aceptas las cookies en el banner de consentimiento, Google Ireland Limited puede instalar cookies de publicidad en tu navegador (ver <a href="politica-cookies.html">Política de Cookies</a>). Sin tu consentimiento, <strong>no se carga ningún script publicitario</strong>.</li>
+        </ul>
+
+        <h2>4. Datos que NO tratamos</h2>
+        <ul>
+            <li><strong>Ninguna contraseña</strong> generada, introducida o verificada.</li>
+            <li><strong>Ningún dato personal identificativo</strong> (nombre, DNI, email) a través de formularios: esta web no tiene formularios de registro ni de contacto con captura de datos.</li>
+            <li><strong>Ninguna cookie publicitaria sin consentimiento expreso.</strong></li>
+        </ul>
+
+        <h2>5. Cesiones y transferencias internacionales</h2>
+        <p>Esta web <strong>no vende, no alquila ni cede</strong> datos personales a terceros. Los únicos tratamientos por terceros son:</p>
+        <ul>
+            <li><strong>Google Ireland Limited (AdSense):</strong> si aceptas las cookies de publicidad, Google puede tratar tu dirección IP y cookies con fines de mostrar anuncios, conforme a su propia política de privacidad. Google Ireland puede transmitir datos a Google LLC en Estados Unidos bajo <strong>cláusulas contractuales tipo (CCT) aprobadas por la Comisión Europea</strong>, que garantizan un nivel adecuado de protección.</li>
+            <li><strong>Proveedor de hosting / dominio:</strong> trata datos técnicos de conexión en el espacio económico europeo.</li>
+        </ul>
+
+        <h2>6. Conservación de los datos</h2>
+        <p>Los datos en tu navegador (historial, favoritos, tema) se conservan indefinidamente hasta que tú los elimines (botón "Limpiar" de la web o borrando los datos del sitio en tu navegador). Los logs técnicos del servidor se conservan el tiempo estrictamente necesario con fines de seguridad, nunca con fines comerciales.</p>
+
+        <h2>7. Derechos del usuario (derechos ARCO y del RGPD)</h2>
+        <p>Conforme al <strong>artículo 15 a 22 del RGPD</strong>, puedes ejercer en cualquier momento, de forma gratuita, tus derechos de:</p>
+        <ul>
+            <li><strong>Acceso</strong> (Art. 15) a tus datos personales.</li>
+            <li><strong>Rectificación</strong> (Art. 16) de datos inexactos.</li>
+            <li><strong>Supresión</strong> (Art. 17): al no tratar datos personales más allá de lo técnico, la supresión efectiva de cualquier dato asociado a tu navegador se consigue borrando los datos del sitio en tu navegador.</li>
+            <li><strong>Limitación del tratamiento</strong> (Art. 18).</li>
+            <li><strong>Portabilidad</strong> (Art. 20).</li>
+            <li><strong>Oposición</strong> (Art. 21), incluida la oposición al tratamiento con fines de publicidad.</li>
+        </ul>
+        <p>Para ejercer cualquiera de estos derechos, escribe a <a href="mailto:PGOsecure@gmail.com">PGOsecure@gmail.com</a> indicando "Derechos RGPD" en el asunto. También puedes retirar tu consentimiento de cookies en cualquier momento borrando el valor <code>sp_cookie_consent</code> de tu navegador o desde la <a href="politica-cookies.html">Política de Cookies</a>.</p>
+
+        <h2>8. Autoridad de control</h2>
+        <p>Si consideras que el tratamiento de tus datos vulnera la normativa, puedes presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong>, en <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a> (C/ Jorge Juan, 6, 28001 Madrid).</p>
+
+        <h2>9. Menores de edad</h2>
+        <p>En aplicación del <strong>artículo 8 del RGPD</strong> y del <strong>artículo 7 de la LOPDGDD</strong>, esta web no requiere consentimiento parental: no recopila datos personales de ningún usuario, sea mayor o menor de edad. No obstante, el consentimiento para cookies de publicidad en menores de 14 años requerirá el consentimiento de sus padres o tutores.</p>
+
+        <h2>10. Seguridad</h2>
+        <p>Por su naturaleza (generación 100% local, sin base de datos de usuarios), el riesgo de tratamiento de datos es mínimo. Aun así, aplicamos las <strong>medidas de seguridad técnicas y organizativas apropiadas</strong> exigidas por el <strong>artículo 32 del RGPD</strong> (cifrado HTTPS, Web Crypto API, k-anonymidad en la verificación de brechas).</p>
+    </div>
+    <div class="footer">
+        <p><a href="index.html">&copy; 2026 PGOsecure</a> &middot; <a href="aviso-legal.html">Aviso Legal</a> &middot; <a href="politica-cookies.html">Política de Cookies</a></p>
+    </div>
+</div>
+<script>
+(function(){
+    function hideBadge(r){
+        r.querySelectorAll('iframe').forEach(function(f){if(f.src&&f.src.indexOf('netlify')!==-1){var c=f.closest('[class],[id],[style]');c?c.remove():f.remove();}});
+        r.querySelectorAll('[class*="netlify"],[id*="netlify"],[data-testid*="netlify"]').forEach(function(e){e.remove();});
+    }
+    hideBadge(document);
+    var o=new MutationObserver(function(m){m.forEach(function(x){x.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==='IFRAME'&&n.src&&n.src.indexOf('netlify')!==-1){var c=n.closest('[class],[id],[style]');c?c.remove():n.remove();}if(n.querySelectorAll)hideBadge(n);var cls=(n.className||'').toString();var id=(n.id||'').toString();if(cls.indexOf('netlify')!==-1||id.indexOf('netlify')!==-1)n.remove();});});});
+    o.observe(document.body,{childList:true,subtree:true});
+    setTimeout(function(){o.disconnect();},10000);
+})();
+</script>
+</body>
+</html>

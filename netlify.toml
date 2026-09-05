@@ -1,0 +1,58 @@
+# Configuración de Netlify — PGOsecure
+# https://pgosecure.netlify.app
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Anti-MIME-sniffing: el navegador no interpreta archivos como otro tipo
+    X-Content-Type-Options = "nosniff"
+    # Anti-clickjacking: nadie puede incrustar tu web en un iframe
+    X-Frame-Options = "DENY"
+    # Control de referrer en enlaces cruzados
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Desactivar cámara, micrófono y geolocalización desde la web
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Headers específicos por tipo de archivo
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Redirects opcionales
+[[redirects]]
+  from = "/generador"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/verificar"
+  to = "/verificar-contraseña-filtrada.html"
+  status = 200
+
+[[redirects]]
+  from = "/passphrase"
+  to = "/que-es-passphrase.html"
+  status = 200
+
+[[redirects]]
+  from = "/guia-contraseña"
+  to = "/como-crear-contraseña-segura.html"
+  status = 200

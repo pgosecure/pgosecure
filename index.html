@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="DL6VMhbNCvGZDW0pjC1EbN6fWCsn5TVWNrxBwilesyI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGOsecure — Generador de Contraseñas Seguras | 100% Local y Gratis</title>
+    <meta name="description" content="Generador de contraseñas seguro y gratuito con 4 modos: aleatoria, passphrase, patrón y pronunciable. Verificador de filtraciones, análisis de entropía y exportación. 100% local en tu navegador.">
+    <meta name="keywords" content="generador contraseñas, password generator, contraseña segura, passphrase generator, verificador contraseñas, password checker, crear contraseña segura gratis">
+    <meta name="author" content="PGOsecure">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pgosecure.netlify.app/">
+    <meta property="og:title" content="PGOsecure — Generador de Contraseñas Seguras">
+    <meta property="og:description" content="4 modos de generación, verificador de filtraciones y análisis de entropía. Todo gratis, seguro y 100% local.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pgosecure.netlify.app/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PGOsecure — Generador de Contraseñas Seguras">
+    <meta name="twitter:description" content="4 modos, breach check, análisis de entropía. Gratis y seguro.">
+    <script type="application/ld+json">
+    {
+        "@context":"https://schema.org",
+        "@type":"WebApplication",
+        "name":"PGOsecure - Generador de Contraseñas",
+        "url":"https://pgosecure.netlify.app/",
+        "description":"Generador de contraseñas seguro con múltiples modos, verificación de filtraciones y análisis de entropía",
+        "applicationCategory":"SecurityApplication",
+        "operatingSystem":"All",
+        "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+        "featureList":["Generación aleatoria segura","Passphrase memorable","Patrón personalizado","Verificación de filtraciones HIBP","Análisis de entropía","Exportación CSV"]
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #05080f;
+            --bg2: #0b1220;
+            --bg3: #111a2b;
+            --bg-input: #0f1729;
+            --text: #e9eef7;
+            --text2: #96a3bb;
+            --text3: #5d6b85;
+            --accent: #6366f1;
+            --accent2: #9aa6ff;
+            --accent-glow: rgba(99,102,241,0.35);
+            --success: #34d399;
+            --success-glow: rgba(52,211,153,0.25);
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --cyan: #22d3ee;
+            --cyan-glow: rgba(34,211,238,0.28);
+            --pink: #ec4899;
+            --orange: #fb923c;
+            --border: rgba(148,163,184,0.09);
+            --border2: rgba(148,163,184,0.18);
+            --r: 16px;
+            --r2: 12px;
+            --r3: 10px;
+            --shadow: 0 12px 40px rgba(0,0,0,0.55);
+            --shadow-sm: 0 4px 16px rgba(0,0,0,0.35);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+        .light { color-scheme: light; --bg:#f5f7fb; --bg2:#ffffff; --bg3:#eef1f8; --bg-input:#edf1f9; --text:#0d1424; --text2:#465470; --text3:#8b98b0; --accent:#4f46e5; --accent2:#6359e0; --accent-glow:rgba(79,70,229,0.16); --success:#059669; --success-glow:rgba(5,150,105,0.18); --warning:#d97706; --danger:#dc2626; --cyan:#0891b2; --cyan-glow:rgba(8,145,178,0.18); --border:rgba(13,20,36,0.07); --border2:rgba(13,20,36,0.14); --shadow:0 12px 40px rgba(13,20,36,0.10); --shadow-sm:0 4px 16px rgba(13,20,36,0.06); }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;overflow-x:hidden;}
+        ::selection{background:var(--accent);color:#fff;}
+        ::-webkit-scrollbar{width:6px;}
+        ::-webkit-scrollbar-track{background:transparent;}
+        ::-webkit-scrollbar-thumb{background:var(--text3);border-radius:10px;}
+
+        /* === TOP ACCENT BAR === */
+        body::before{content:'';position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent) 0%,var(--cyan) 50%,var(--success) 100%);z-index:300;pointer-events:none;}
+
+        /* === HEADER / NAV === */
+        .site-header{position:sticky;top:0;z-index:200;background:rgba(5,8,15,0.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+        .light .site-header{background:rgba(245,247,251,0.85);}
+        .header-inner{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:20px;}
+        .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800;font-size:17px;letter-spacing:-0.01em;white-space:nowrap;}
+        .brand-logo{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .brand-logo img{width:100%;height:100%;object-fit:contain;}
+        .footer-brand .brand-logo{width:44px;height:44px;}
+        .brand .b-accent{color:var(--accent2);}
+        .nav{display:flex;gap:4px;}
+        .nav-link{padding:8px 14px;border-radius:50px;font-size:14px;font-weight:600;color:var(--text3);text-decoration:none;transition:all .2s;white-space:nowrap;}
+        .nav-link:hover{color:var(--text);background:var(--bg3);}
+        .nav-link.active{color:var(--text);background:var(--bg3);}
+        .header-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+        .btn-nav{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:50px;border:none;font-family:var(--font);font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--accent) 0%,var(--cyan) 120%);box-shadow:0 4px 16px var(--accent-glow);cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;}
+        .btn-nav:hover{transform:translateY(-1px);box-shadow:0 6px 22px var(--accent-glow);}
+        .btn-nav svg{width:16px;height:16px;}
+
+        /* === HERO === */
+        .hero{text-align:center;padding:56px 20px 44px;position:relative;overflow:hidden;}
+        .hero::before{content:'';position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(56,130,246,0.16) 0%,rgba(99,102,241,0.10) 40%,transparent 70%);pointer-events:none;z-index:0;}
+        .hero>*{position:relative;z-index:1;}
+        .hero .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,0.10);border:1px solid rgba(99,102,241,0.25);color:var(--accent2);padding:7px 18px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:22px;}
+        .hero .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);}
+        .hero h1{font-size:clamp(30px,5.5vw,50px);font-weight:900;line-height:1.12;margin-bottom:16px;letter-spacing:-0.03em;}
+        .hero h1 .grad{background:linear-gradient(135deg,#818cf8 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero p{color:var(--text2);font-size:16px;max-width:560px;margin:0 auto;line-height:1.7;}
+        .hero .shortcuts{display:flex;gap:14px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
+        .hero .shortcut{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);}
+        .hero .shortcut kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:3px 8px;font-family:var(--mono);font-size:11px;color:var(--text2);}
+        .hero .guides-link{display:inline-flex;align-items:center;gap:8px;margin:24px auto 0;padding:12px 24px;border-radius:50px;font-size:13px;font-weight:700;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--accent) 0%,var(--cyan) 120%);box-shadow:0 6px 24px var(--accent-glow);transition:transform .2s,box-shadow .2s;}
+        .hero .guides-link:hover{transform:translateY(-2px);box-shadow:0 10px 32px var(--accent-glow);}
+        .hero .guides-link svg{width:16px;height:16px;}
+
+        /* === CONTAINER === */
+        .wrap{max-width:720px;margin:0 auto;padding:0 16px 80px;}
+
+        /* === CARD === */
+        .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);margin-bottom:20px;animation:fadeUp .5s ease;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+        .card-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+        .card-title svg{width:16px;height:16px;}
+        .guides-h2{font-size:clamp(22px,4vw,28px);font-weight:800;text-align:center;margin:0 0 8px;}
+        .guides-sub{text-align:center;color:var(--text2);font-size:14px;margin-bottom:24px;}
+        .guide{display:block;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:20px 22px;margin-bottom:14px;text-decoration:none;box-shadow:var(--shadow);transition:border-color .2s,transform .2s;animation:fadeUp .5s ease;}
+        .guide:hover{border-color:var(--accent);transform:translateY(-2px);}
+        .guide-ico{width:40px;height:40px;border-radius:12px;background:var(--accent-glow);color:var(--accent2);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+        .guide-ico svg{width:22px;height:22px;}
+        .guide h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;}
+        .guide p{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:12px;}
+        .guide-more{font-size:13px;font-weight:700;color:var(--accent2);display:inline-flex;align-items:center;gap:4px;}
+
+        /* === TABS === */
+        .tabs{display:flex;gap:6px;margin-bottom:24px;background:var(--bg3);padding:4px;border-radius:var(--r2);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+        .tab{flex:1;min-width:0;padding:10px 8px;border:none;background:none;font-family:var(--font);font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;border-radius:var(--r3);transition:all .2s;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px;}
+        .tab svg{width:16px;height:16px;flex-shrink:0;}
+        .tab:hover{color:var(--text2);}
+        .tab.active{background:var(--accent);color:#fff;box-shadow:0 2px 12px var(--accent-glow);}
+
+        /* === PASSWORD DISPLAY === */
+        .pw-display{background:var(--bg-input);border:2px solid var(--border2);border-radius:var(--r2);padding:22px;position:relative;transition:border-color .3s,box-shadow .3s;}
+        .pw-display:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-glow);}
+        .pw-chars{font-family:var(--mono);font-size:clamp(16px,3.5vw,24px);font-weight:600;line-height:1.6;word-break:break-all;min-height:36px;user-select:all;}
+        .pw-chars .c-u{color:#60a5fa;} .pw-chars .c-l{color:var(--text);} .pw-chars .c-n{color:#fbbf24;} .pw-chars .c-s{color:#f87171;} .pw-chars .c-w{color:var(--cyan);}
+        .light .pw-chars .c-u{color:#2563eb;} .light .pw-chars .c-n{color:#b45309;} .light .pw-chars .c-s{color:#dc2626;} .light .pw-chars .c-w{color:#0891b2;}
+        .pw-chars .space-dot{color:var(--text3);font-size:.6em;vertical-align:middle;}
+        .pw-actions{display:flex;gap:8px;margin-top:16px;}
+
+        /* === BUTTONS === */
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:var(--r3);border:none;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+        .btn:active{transform:scale(.97);}
+        .btn svg{width:18px;height:18px;flex-shrink:0;}
+        .btn:focus-visible,.nav-link:focus-visible,.theme-btn:focus-visible,.brand:focus-visible,.guide:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+        .btn-p{background:var(--accent);color:#fff;}
+        .btn-p:hover{background:#7c6cf0;box-shadow:0 4px 20px var(--accent-glow);}
+        .btn-s{background:var(--bg-input);color:var(--text);border:1px solid var(--border2);}
+        .btn-s:hover{border-color:var(--text3);}
+        .btn-ok{background:var(--success);color:#fff;}
+        .btn-w{background:var(--warning);color:#000;}
+        .btn-d{background:var(--danger);color:#fff;}
+        .btn-g{background:linear-gradient(135deg,var(--accent) 0%,var(--cyan) 120%);color:#fff;}
+        .btn-g:hover{box-shadow:0 4px 20px var(--cyan-glow);}
+        .btn-f{flex:1;}
+        .btn-i{width:44px;height:44px;padding:0;flex:0 0 44px;}
+        .btn-sm{padding:8px 14px;font-size:12px;}
+        .btn-pill{border-radius:50px;}
+
+        /* Ripple */
+        .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);transform:scale(0);animation:rippleAnim .5s ease-out;}
+        @keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
+
+        /* === STRENGTH === */
+        .strength{margin-bottom:24px;}
+        .str-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+        .str-label{font-size:13px;font-weight:600;}
+        .str-level{font-size:13px;font-weight:700;padding:3px 10px;border-radius:50px;}
+        .str-bar{height:6px;background:var(--bg-input);border-radius:10px;overflow:hidden;}
+        .str-fill{height:100%;border-radius:10px;transition:width .5s cubic-bezier(.4,0,.2,1),background .3s;}
+
+        /* === ENTROPY === */
+        .entropy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:16px;}
+        .entropy-item{background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);padding:14px;text-align:center;}
+        .entropy-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent2);margin-bottom:4px;}
+        .entropy-lbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+
+        /* === MODE PANELS === */
+        .mode-panel{display:none;}
+        .mode-panel.active{display:block;}
+
+        /* === SLIDER === */
+        .slider-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+        .slider-lbl{font-size:14px;font-weight:600;}
+        .slider-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent2);min-width:32px;text-align:right;}
+        input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:var(--bg-input);border-radius:10px;outline:none;cursor:pointer;}
+        input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 2px 10px var(--accent-glow);transition:transform .15s;}
+        input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
+        input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;}
+
+        /* === OPTIONS GRID === */
+        .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+        .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);cursor:pointer;transition:all .2s;user-select:none;}
+        .opt:hover{border-color:var(--accent);}
+        .opt.on{border-color:var(--accent);background:rgba(99,102,241,0.08);}
+        .opt input{display:none;}
+        .opt-check{width:20px;height:20px;border:2px solid var(--text3);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+        .opt.on .opt-check{background:var(--accent);border-color:var(--accent);}
+        .opt-check svg{width:12px;height:12px;color:#fff;opacity:0;transition:opacity .15s;}
+        .opt.on .opt-check svg{opacity:1;}
+        .opt-info .opt-name{font-size:14px;font-weight:600;color:var(--text);}
+        .opt-info .opt-ex{font-family:var(--mono);font-size:11px;color:var(--text3);}
+
+        /* === PASSPHRASE === */
+        .word-chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;}
+        .word-chip{background:var(--bg-input);border:1px solid var(--border);border-radius:50px;padding:8px 16px;font-size:14px;font-weight:600;color:var(--text);cursor:default;transition:all .2s;animation:chipIn .3s ease;}
+        .word-chip:hover{border-color:var(--accent);transform:translateY(-1px);}
+        .word-chip .sep{color:var(--accent2);font-weight:700;margin:0 2px;}
+        @keyframes chipIn{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:none;}}
+
+        .wordlist-sel{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+        .wl-btn{padding:7px 14px;border-radius:50px;border:1px solid var(--border2);background:var(--bg-input);color:var(--text2);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;}
+        .wl-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+        .wl-btn:hover:not(.active){border-color:var(--accent);}
+
+        /* === PATTERN === */
+        .pattern-builder{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0;}
+        .p-token{padding:8px 14px;border-radius:var(--r3);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;border:2px solid var(--border);background:var(--bg-input);color:var(--text2);}
+        .p-token:hover{border-color:var(--accent);}
+        .p-token.active{border-color:var(--accent);color:var(--accent2);background:rgba(99,102,241,0.08);}
+        .pattern-preview{font-family:var(--mono);font-size:15px;padding:14px;background:var(--bg-input);border-radius:var(--r3);border:1px solid var(--border);margin-top:12px;color:var(--text2);text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center;}
+
+        /* === PRONOUNCEABLE === */
+        .pron-opts{display:flex;gap:10px;align-items:center;margin:14px 0;flex-wrap:wrap;}
+        .pron-opts label{font-size:13px;font-weight:600;color:var(--text2);}
+
+        /* === BREACH CHECK === */
+        .breach-result{margin-top:14px;padding:16px;border-radius:var(--r3);display:none;align-items:center;gap:12px;font-weight:600;font-size:14px;animation:fadeUp .3s ease;}
+        .breach-result.safe{display:flex;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--success);}
+        .breach-result.danger{display:flex;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:var(--danger);}
+        .breach-result svg{width:22px;height:22px;flex-shrink:0;}
+        .breach-count{font-family:var(--mono);}
+
+        /* === CHECK PASSWORD (CUSTOM) === */
+        .check-input-row{display:flex;gap:8px;margin-bottom:12px;}
+        .check-input-wrap{position:relative;flex:1;}
+        .check-input{width:100%;padding:12px 44px 12px 14px;background:var(--bg-input);border:1px solid var(--border2);border-radius:var(--r3);font-family:var(--mono);font-size:15px;color:var(--text);outline:none;transition:border-color .2s;}
+        .check-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
+        .check-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);cursor:pointer;padding:6px;border-radius:6px;display:flex;align-items:center;transition:color .2s;}
+        .check-eye:hover{color:var(--accent);}
+        .check-eye svg{width:18px;height:18px;}
+        .check-note{font-size:12px;color:var(--text3);line-height:1.6;margin-top:12px;}
+        .check-note strong{color:var(--text2);}
+        .check-hint{font-size:11px;color:var(--text3);margin-top:6px;}
+
+        /* === PRIVACY LEGAL SECTION === */
+        .privacy{border:1px solid rgba(34,197,94,0.2);background:linear-gradient(135deg,var(--bg2) 0%,rgba(34,197,94,0.03) 60%,var(--bg2) 100%);}
+        .privacy-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,0.12);color:var(--success);font-size:12px;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:14px;letter-spacing:.4px;text-transform:uppercase;}
+        .privacy p{font-size:14px;line-height:1.75;color:var(--text2);margin-bottom:14px;}
+        .privacy p strong{color:var(--text);}
+        .privacy-guarantee{padding:14px 16px;background:rgba(34,197,94,0.06);border-left:4px solid var(--success);border-radius:0 var(--r3) var(--r3) 0;margin-bottom:18px;}
+        .privacy-guarantee p{margin-bottom:0;font-size:15px;}
+        .laws-list{list-style:none;margin:0 0 18px;}
+        .laws-list li{padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);margin-bottom:8px;transition:border-color .2s;}
+        .laws-list li:hover{border-color:var(--accent);}
+        .law-name{font-weight:700;color:var(--text);font-size:13px;display:block;margin-bottom:4px;}
+        .law-name .law-key{display:inline-block;background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;letter-spacing:.5px;}
+        .law-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+        .law-desc a{color:var(--accent2);text-decoration:none;font-weight:500;}
+        .law-desc a:hover{text-decoration:underline;}
+        .privacy-final{margin-top:16px;}
+        .privacy-final p{font-size:13px;font-style:italic;color:var(--text3);}
+        .data-rights{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:14px 0;}
+        .right-item{padding:12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);text-align:center;}
+        .right-item .ri-ico{display:block;font-size:22px;margin-bottom:6px;}
+        .right-item .ri-txt{font-size:11px;font-weight:600;color:var(--text2);line-height:1.4;}
+
+        /* === HISTORY === */
+        .hist-list{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto;}
+        .hist-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);transition:all .2s;animation:fadeUp .3s ease;}
+        .hist-item:hover{border-color:var(--accent);}
+        .hist-pw{flex:1;font-family:var(--mono);font-size:12px;word-break:break-all;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;user-select:all;}
+        .hist-meta{font-size:10px;color:var(--text3);white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+        .hist-str{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+        .hist-btn{background:none;border:none;color:var(--text3);cursor:pointer;padding:4px;border-radius:4px;transition:color .2s;}
+        .hist-btn:hover{color:var(--accent);}
+        .hist-btn svg{width:15px;height:15px;}
+        .hist-empty{text-align:center;color:var(--text3);font-size:14px;padding:24px;}
+        .hist-actions{display:flex;gap:8px;margin-top:12px;}
+
+        /* === EXPORT === */
+        .export-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+
+        /* === CHAR DISTRIBUTION === */
+        .char-dist{display:flex;gap:4px;height:8px;border-radius:10px;overflow:hidden;margin:12px 0 4px;}
+        .char-dist span{transition:width .4s ease;}
+        .dist-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+        .dist-legend span{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);font-weight:500;}
+        .dist-legend .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+        /* === AD SLOT === */
+        .ad-slot{background:var(--bg2);border:2px dashed var(--border2);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:13px;text-align:center;padding:24px;margin:24px 0;min-height:90px;}
+
+        /* === FAQ === */
+        .faq h2{text-align:center;font-size:clamp(22px,4vw,28px);font-weight:800;margin-bottom:28px;}
+        .faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:10px;overflow:hidden;}
+        .faq-q{width:100%;padding:16px 18px;background:none;border:none;color:var(--text);font-family:var(--font);font-size:15px;font-weight:600;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+        .faq-q svg{width:16px;height:16px;color:var(--text3);transition:transform .3s;flex-shrink:0;}
+        .faq-item.open .faq-q svg{transform:rotate(180deg);}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+        .faq-item.open .faq-a{max-height:400px;}
+        .faq-a p{padding:0 18px 16px;color:var(--text2);font-size:14px;line-height:1.7;}
+
+        /* === TOAST === */
+        .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--success);color:#fff;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:0 8px 32px rgba(34,197,94,0.3);transition:transform .35s cubic-bezier(.34,1.56,.64,1);z-index:1000;pointer-events:none;}
+        .toast.show{transform:translateX(-50%) translateY(0);}
+        .toast svg{width:18px;height:18px;}
+        .toast.err{background:var(--danger);box-shadow:0 8px 32px rgba(239,68,68,0.3);}
+
+        /* === COOKIE CONSENT BANNER === */
+        .cookie-banner{position:fixed;bottom:16px;left:16px;right:16px;max-width:760px;margin:0 auto;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:16px 20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;flex-wrap:wrap;z-index:990;animation:fadeUp .4s ease;}
+        .cookie-banner.hidden{display:none;}
+        .cookie-banner p{flex:1;min-width:220px;font-size:13px;color:var(--text2);line-height:1.6;}
+        .cookie-banner p a{color:var(--accent2);text-decoration:underline;}
+        .cookie-btns{display:flex;gap:8px;flex-wrap:wrap;}
+        .cookie-btns button{font-family:var(--font);font-size:13px;font-weight:600;padding:9px 18px;border-radius:var(--r3);cursor:pointer;border:none;transition:all .2s;}
+        .cb-accept{background:var(--accent);color:#fff;}
+        .cb-accept:hover{background:var(--accent2);box-shadow:0 2px 12px var(--accent-glow);}
+        .cb-reject{background:var(--bg-input);color:var(--text2);border:1px solid var(--border2)!important;}
+        .cb-reject:hover{color:var(--text);border-color:var(--text3)!important;}
+
+        /* === THEME === */
+        .theme-btn{width:38px;height:38px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+        .theme-btn:hover{color:var(--cyan);border-color:var(--cyan);box-shadow:0 0 12px var(--cyan-glow);}
+        .theme-btn svg{width:18px;height:18px;}
+
+        /* === COUNTERS === */
+        .counters{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap;}
+        .counter-pill{font-size:11px;font-weight:600;padding:4px 10px;border-radius:50px;font-family:var(--mono);display:flex;align-items:center;gap:4px;}
+        .counter-pill .num{font-weight:700;}
+        .cp-u{background:rgba(96,165,250,0.12);color:#60a5fa;}
+        .cp-l{background:var(--bg-input);color:var(--text2);}
+        .cp-n{background:rgba(251,191,36,0.12);color:#fbbf24;}
+        .cp-s{background:rgba(248,113,113,0.12);color:#f87171;}
+        .light .cp-u{background:rgba(37,99,235,0.1);color:#2563eb;}
+        .light .cp-n{background:rgba(180,83,9,0.1);color:#b45309;}
+        .light .cp-s{background:rgba(220,38,38,0.08);color:#dc2626;}
+
+        /* === FOOTER === */
+        .footer{border-top:1px solid var(--border);background:var(--bg2);margin-top:32px;padding:44px 20px 32px;}
+        .footer-inner{max-width:1080px;margin:0 auto;}
+        .footer-top{display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap;margin-bottom:30px;}
+        .footer-brand{display:flex;gap:12px;align-items:flex-start;max-width:340px;}
+        .footer-brand .brand-logo{width:44px;height:44px;}
+        .footer-brand strong{display:block;font-size:15px;color:var(--text);}
+        .footer-brand .f-tag{font-size:12px;color:var(--text3);line-height:1.5;}
+        .footer-col{display:flex;flex-direction:column;gap:9px;min-width:120px;}
+        .footer-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.1px;color:var(--text3);margin-bottom:4px;}
+        .footer-col a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s;}
+        .footer-col a:hover{color:var(--cyan);}
+        .footer-bottom{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--text3);}
+        .footer-trust{display:flex;align-items:center;gap:6px;color:var(--text3);}
+        .footer-trust svg{width:14px;height:14px;color:var(--success);}
+
+        /* === RESPONSIVE === */
+        @media(max-width:720px){
+            .nav{gap:2px;}
+            .btn-nav{padding:9px 12px;}
+        }
+        @media(max-width:560px){
+            .nav-link:not(.active){display:none;}
+            .header-inner{gap:12px;}
+            .brand{font-size:15px;}
+            .btn-nav span{display:none;}
+            .btn-nav svg{margin:0;}
+            .opts{grid-template-columns:1fr;}
+            .card{padding:18px;}
+            .pw-actions{flex-wrap:wrap;}
+            .btn-f{min-width:100%;}
+            .entropy-grid{grid-template-columns:1fr 1fr;}
+            .tab span{display:none;}
+            .tab svg{width:18px;height:18px;}
+        }
+
+        /* === NETLIFY BADGE — tema oscuro === */
+        .netlify-badge,
+        a[href*="netlify.com"][href*="badge"],
+        a[rel="noopener"][href*="netlify"],
+        .snip-a05640a737982,
+        [data-testid="netlify-badge"]{
+            background: var(--bg2) !important;
+            color: var(--text2) !important;
+            border: 1px solid var(--border2) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+            backdrop-filter: blur(8px) !important;
+            font-family: var(--font) !important;
+        }
+        .netlify-badge:hover,
+        a[href*="netlify.com"][href*="badge"]:hover,
+        a[rel="noopener"][href*="netlify"]:hover,
+        .snip-a05640a737982:hover,
+        [data-testid="netlify-badge"]:hover{
+            background: var(--bg3) !important;
+            color: var(--text) !important;
+            border-color: var(--accent) !important;
+        }
+        .netlify-badge img,
+        a[href*="netlify.com"] img,
+        .snip-a05640a737982 img,
+        [data-testid="netlify-badge"] img{
+            filter: brightness(0) invert(1) !important;
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a class="brand" href="index.html">
+            <span class="brand-logo">
+                <img src="img/logo-pgosecure.png" alt="PGOsecure logo">
+            </span>
+            <span class="brand-name">PGO<span class="b-accent">secure</span></span>
+        </a>
+        <nav class="nav">
+            <a class="nav-link active" href="index.html">Generador</a>
+            <a class="nav-link" href="#guias">Guías</a>
+            <a class="nav-link" href="politica-privacidad.html">Privacidad</a>
+        </nav>
+        <div class="header-right">
+            <a class="btn-nav" href="#check-card">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+                <span>Verificar contraseña</span>
+            </a>
+            <button class="theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema">
+                <svg id="ico-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
+                <svg id="ico-sun" style="display:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<header class="hero">
+    <div class="pill">
+        <span class="dot"></span>
+        4 Modos &bull; Verificador de filtraciones &bull; 100% Local
+    </div>
+    <h1>Generador de Contraseñas<br><span class="grad">Seguras y Confiables</span></h1>
+    <p>Crea contraseñas ultra seguras con 4 modos distintos y comprueba si alguna de tus contraseñas ha sido filtrada. Todo se genera en tu navegador: <strong style="color:var(--text);">tus contraseñas nunca salen de tu dispositivo</strong>.</p>
+    <div class="shortcuts">
+        <span class="shortcut"><kbd>Space</kbd> Generar</span>
+        <span class="shortcut"><kbd>Ctrl+C</kbd> Copiar</span>
+        <span class="shortcut"><kbd>1-6</kbd> Cambiar modo</span>
+    </div>
+    <a class="guides-link" href="#guias">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
+        Aprende con nuestras guías
+    </a>
+</header>
+
+<main class="wrap">
+
+    <!-- === GENERATOR CARD === -->
+    <div class="card" id="gen-card">
+        <!-- Mode Tabs -->
+        <div class="tabs" role="tablist">
+            <button class="tab active" onclick="switchMode('random')" data-mode="random">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                <span>Aleatoria</span>
+            </button>
+            <button class="tab" onclick="switchMode('passphrase')" data-mode="passphrase">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
+                <span>Passphrase</span>
+            </button>
+            <button class="tab" onclick="switchMode('pattern')" data-mode="pattern">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L12 12.75 6.429 9.75m11.142 0 4.179 2.25-9.75 5.25-9.75-5.25 4.179-2.25"/></svg>
+                <span>Patrón</span>
+            </button>
+            <button class="tab" onclick="switchMode('pronounceable')" data-mode="pronounceable">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z"/></svg>
+                <span>Pronunciable</span>
+            </button>
+            <button class="tab" onclick="switchMode('wifi')" data-mode="wifi">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0z"/></svg>
+                <span>WiFi</span>
+            </button>
+            <button class="tab" onclick="switchMode('pin')" data-mode="pin">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                <span>PIN</span>
+            </button>
+        </div>
+
+        <!-- PASSWORD DISPLAY -->
+        <div class="pw-display">
+            <div class="pw-chars" id="pw-display"></div>
+            <div class="pw-actions">
+                <button class="btn btn-g btn-f btn-pill" onclick="gen()" id="gen-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182"/></svg>
+                    Generar Contraseña
+                </button>
+                <button class="btn btn-p btn-i" onclick="copyPw()" title="Copiar (Ctrl+C)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/></svg>
+                </button>
+                <button class="btn btn-s btn-i" onclick="toggleFav()" title="Favorito" id="fav-btn">
+                    <svg id="fav-ico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg>
+                </button>
+                <button class="btn btn-s btn-i" onclick="checkBreach()" title="Verificar si fue hackeada" id="breach-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Breach Result -->
+        <div class="breach-result" id="breach-result"></div>
+
+        <!-- Char Distribution -->
+        <div class="char-dist" id="char-dist"></div>
+        <div class="dist-legend" id="dist-legend"></div>
+        <div class="counters" id="char-counters"></div>
+
+        <!-- MODE: RANDOM -->
+        <div class="mode-panel active" id="panel-random">
+            <div style="margin-top:20px;">
+                <div class="slider-row">
+                    <span class="slider-lbl">Longitud</span>
+                    <span class="slider-val" id="len-val">20</span>
+                </div>
+                <input type="range" id="len-slider" min="4" max="128" value="20" oninput="S.length=+this.value;$('#len-val').textContent=this.value;gen()">
+            </div>
+            <div style="margin-top:18px;">
+                <div class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                    Caracteres
+                </div>
+                <div class="opts">
+                    <label class="opt on" onclick="togOpt(this,'upper')"><input type="checkbox" checked><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><div class="opt-info"><div class="opt-name">Mayúsculas</div><div class="opt-ex">A B C D E</div></div></label>
+                    <label class="opt on" onclick="togOpt(this,'lower')"><input type="checkbox" checked><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><div class="opt-info"><div class="opt-name">Minúsculas</div><div class="opt-ex">a b c d e</div></div></label>
+                    <label class="opt on" onclick="togOpt(this,'digits')"><input type="checkbox" checked><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><div class="opt-info"><div class="opt-name">Números</div><div class="opt-ex">0 1 2 3 4</div></div></label>
+                    <label class="opt on" onclick="togOpt(this,'symbols')"><input type="checkbox" checked><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><div class="opt-info"><div class="opt-name">Símbolos</div><div class="opt-ex">! @ # $ % ^</div></div></label>
+                </div>
+                <label class="opt" onclick="togOpt(this,'noAmbig')" style="display:flex;margin-top:8px;">
+                    <input type="checkbox"><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Excluir caracteres ambiguos</div><div class="opt-ex">Evita 0/O, 1/l/I, y símbolos confusos</div></div>
+                </label>
+            </div>
+        </div>
+
+        <!-- MODE: PASSPHRASE -->
+        <div class="mode-panel" id="panel-passphrase">
+            <div style="margin-top:20px;">
+                <div class="slider-row">
+                    <span class="slider-lbl">Palabras</span>
+                    <span class="slider-val" id="words-val">5</span>
+                </div>
+                <input type="range" id="words-slider" min="3" max="12" value="5" oninput="S.words=+this.value;$('#words-val').textContent=this.value;gen()">
+            </div>
+            <div style="margin-top:14px;">
+                <div class="card-title">Lista de palabras</div>
+                <div class="wordlist-sel">
+                    <button class="wl-btn active" onclick="setWL(this,'es')">🇪🇸 Español</button>
+                    <button class="wl-btn" onclick="setWL(this,'en')">🇺🇸 English</button>
+                    <button class="wl-btn" onclick="setWL(this,'eff')">🔒 EFF (seguro)</button>
+                </div>
+            </div>
+            <div style="margin-top:10px;">
+                <div class="card-title">Separador</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <button class="wl-btn active" onclick="setSep(this,'-')">Guion (-)</button>
+                    <button class="wl-btn" onclick="setSep(this,'_')">Guión bajo (_)</button>
+                    <button class="wl-btn" onclick="setSep(this,' ')">Espacio</button>
+                    <button class="wl-btn" onclick="setSep(this,'.')">Punto (.)</button>
+                    <button class="wl-btn" onclick="setSep(this,'')">Ninguno</button>
+                </div>
+            </div>
+            <div style="margin-top:14px;">
+                <label class="opt on" onclick="togOpt(this,'capWords')" style="display:inline-flex;">
+                    <input type="checkbox" checked><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Capitalizar palabras</div></div>
+                </label>
+                <label class="opt" onclick="togOpt(this,'addNumber')" style="display:inline-flex;margin-left:8px;">
+                    <input type="checkbox"><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Añadir número al final</div></div>
+                </label>
+                <label class="opt" onclick="togOpt(this,'leet')" style="display:inline-flex;margin-left:8px;" title="Transforma letras a estilo hacker (ej: casa → c4s4)">
+                    <input type="checkbox"><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Estilo "Leet" (hacker)</div></div>
+                </label>
+            </div>
+            <div style="margin-top:14px;">
+                <div class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"/></svg>
+                    O usa tus propias palabras
+                </div>
+                <div style="display:flex;gap:8px;">
+                    <input type="text" id="custom-words" placeholder="Escribe palabras separadas por comas (ej: gato, playa, ninja)" style="flex:1;padding:10px 14px;background:var(--bg-input);border:1px solid var(--border2);border-radius:var(--r3);font-size:13px;color:var(--text);outline:none;transition:border-color .2s;" oninput="S.customWords=this.value.split(',').map(w=>w.trim()).filter(Boolean);gen()">
+                    <button class="btn btn-s btn-sm" onclick="clearCustomWords()">Limpiar</button>
+                </div>
+            </div>
+            <div class="word-chips" id="word-chips"></div>
+        </div>
+
+        <!-- MODE: PATTERN -->
+        <div class="mode-panel" id="panel-pattern">
+            <div style="margin-top:20px;">
+                <div class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                    Construye tu patrón
+                </div>
+                <p style="font-size:13px;color:var(--text3);margin-bottom:12px;">Haz clic en los tokens para construir tu patrón. La contraseña se generará siguiendo ese esquema.</p>
+                <div class="pattern-builder" id="pattern-builder"></div>
+                <div class="pattern-preview" id="pattern-preview">Haz clic en los tokens de arriba para construir tu patrón</div>
+            </div>
+            <div style="margin-top:16px;">
+                <div class="slider-row">
+                    <span class="slider-lbl">Repeticiones del patrón</span>
+                    <span class="slider-val" id="pat-rep-val">2</span>
+                </div>
+                <input type="range" id="pat-rep" min="1" max="5" value="2" oninput="S.patRep=+this.value;$('#pat-rep-val').textContent=this.value;gen()">
+            </div>
+        </div>
+
+        <!-- MODE: PRONOUNCEABLE -->
+        <div class="mode-panel" id="panel-pronounceable">
+            <div style="margin-top:20px;">
+                <div class="slider-row">
+                    <span class="slider-lbl">Longitud (caracteres)</span>
+                    <span class="slider-val" id="pron-len-val">14</span>
+                </div>
+                <input type="range" id="pron-len" min="6" max="32" value="14" oninput="S.pronLen=+this.value;$('#pron-len-val').textContent=this.value;gen()">
+            </div>
+            <div class="pron-opts">
+                <label class="opt on" onclick="togOpt(this,'pronUpper')" style="display:inline-flex;">
+                    <input type="checkbox" checked><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Capitalizar</div></div>
+                </label>
+                <label class="opt" onclick="togOpt(this,'pronNums')" style="display:inline-flex;margin-left:8px;">
+                    <input type="checkbox"><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Añadir números</div></div>
+                </label>
+                <label class="opt" onclick="togOpt(this,'pronSymb')" style="display:inline-flex;margin-left:8px;">
+                    <input type="checkbox"><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Añadir símbolo</div></div>
+                </label>
+            </div>
+        </div>
+
+        <!-- MODE: WIFI -->
+        <div class="mode-panel" id="panel-wifi">
+            <div style="margin-top:20px;">
+                <div class="slider-row">
+                    <span class="slider-lbl">Longitud de la clave</span>
+                    <span class="slider-val" id="wifi-len-val">16</span>
+                </div>
+                <input type="range" id="wifi-len" min="8" max="63" value="16" oninput="S.wifiLen=+this.value;$('#wifi-len-val').textContent=this.value;gen()">
+            </div>
+            <div style="margin-top:14px;">
+                <div class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"/></svg>
+                    Nombre de tu red (SSID)
+                </div>
+                <input type="text" id="wifi-ssid" placeholder="MiRedWiFi" value="MiRedWiFi" style="width:100%;padding:10px 14px;background:var(--bg-input);border:1px solid var(--border2);border-radius:var(--r3);font-size:13px;color:var(--text);outline:none;" oninput="S.ssid=this.value||'MiRedWiFi';gen()">
+            </div>
+            <div style="margin-top:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+                <div style="flex-shrink:0;">
+                    <div id="wifi-qr" style="background:#fff;padding:12px;border-radius:var(--r3);width:160px;height:160px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;color:#888;"></div>
+                    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:6px;">Escanea para conectar</p>
+                </div>
+                <div style="flex:1;min-width:200px;">
+                    <div class="card-title">Configuración WiFi (WPA2)</div>
+                    <div style="font-family:var(--mono);font-size:12px;color:var(--text2);background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);padding:12px;word-break:break-all;user-select:all;" id="wifi-config">--</div>
+                    <div style="display:flex;gap:6px;margin-top:10px;">
+                        <button class="btn btn-p btn-sm btn-f" onclick="copyWifiConfig()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/></svg>
+                            Copiar config
+                        </button>
+                        <button class="btn btn-ok btn-sm btn-f" onclick="shareWifi()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"/></svg>
+                            Compartir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODE: PIN -->
+        <div class="mode-panel" id="panel-pin">
+            <div style="margin-top:20px;">
+                <div class="slider-row">
+                    <span class="slider-lbl">Dígitos del PIN</span>
+                    <span class="slider-val" id="pin-len-val">6</span>
+                </div>
+                <input type="range" id="pin-len" min="4" max="12" value="6" oninput="S.pinLen=+this.value;$('#pin-len-val').textContent=this.value;gen()">
+            </div>
+            <div style="margin-top:10px;">
+                <label class="opt" onclick="togOpt(this,'pinNoRepeat')" style="display:inline-flex;" title="Evita que el mismo dígito aparezca consecutivamente">
+                    <input type="checkbox"><div class="opt-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+                    <div class="opt-info"><div class="opt-name">Evitar dígitos repetidos consecutivos</div></div>
+                </label>
+            </div>
+            <div style="margin-top:16px;">
+                <div class="card-title">Fácil de recordar</div>
+                <p style="font-size:13px;color:var(--text3);margin-bottom:8px;">Consejo: memoriza tu PIN por bloques (ej: 482-901) y evita patrones como 1234, 0000 o tu año de nacimiento.</p>
+            </div>
+        </div>
+
+        <!-- MULTI -->
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+            <div class="slider-row">
+                <span class="slider-lbl">Generar múltiples</span>
+                <span class="slider-val" id="multi-val">1</span>
+            </div>
+            <input type="range" id="multi-slider" min="1" max="20" value="1" oninput="S.multi=+this.value;$('#multi-val').textContent=this.value;gen()">
+            <div id="multi-list" style="margin-top:12px;"></div>
+        </div>
+    </div>
+
+    <!-- === ENTROPY CARD === -->
+    <div class="card" id="entropy-card">
+        <div class="card-title">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+            Análisis de Entropía
+        </div>
+        <div class="entropy-grid" id="entropy-grid">
+            <div class="entropy-item"><div class="entropy-val" id="ent-bits">--</div><div class="entropy-lbl">Bits de entropía</div></div>
+            <div class="entropy-item"><div class="entropy-val" id="ent-charset">--</div><div class="entropy-lbl">Pool de caracteres</div></div>
+            <div class="entropy-item"><div class="entropy-val" id="ent-combos">--</div><div class="entropy-lbl">Combinaciones</div></div>
+            <div class="entropy-item"><div class="entropy-val" id="ent-crack">--</div><div class="entropy-lbl">Tiempo para crackear</div></div>
+        </div>
+
+        <!-- Crack-time comparison -->
+        <div style="margin-top:18px;">
+            <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+                ¿Cuánto tarda en crackearse frente a otras?
+            </div>
+            <div id="crack-compare"></div>
+        </div>
+
+        <!-- Human analogy -->
+        <div style="margin-top:14px;padding:14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+                <span style="font-size:20px;">🧠</span>
+                <p style="font-size:13px;color:var(--text2);line-height:1.6;" id="ent-analogy">Genera una contraseña para ver una analogía del mundo real.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === SESSION STATS CARD === -->
+    <div class="card">
+        <div class="card-title">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Tu actividad en esta sesión
+        </div>
+        <div class="entropy-grid" id="stats-grid">
+            <div class="entropy-item"><div class="entropy-val" id="st-total">0</div><div class="entropy-lbl">Contraseñas generadas</div></div>
+            <div class="entropy-item"><div class="entropy-val" id="st-bits">0</div><div class="entropy-lbl">Bits de entropía totales</div></div>
+            <div class="entropy-item"><div class="entropy-val" id="st-strongest">--</div><div class="entropy-lbl">La más fuerte</div></div>
+            <div class="entropy-item"><div class="entropy-val" id="st-modes">--</div><div class="entropy-lbl">Modos usados</div></div>
+        </div>
+        <div style="margin-top:14px;">
+            <div class="card-title">Distribución por modo</div>
+            <div id="stats-modes" style="display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+    </div>
+
+    <!-- === HISTORY CARD === -->
+    <div class="card">
+        <div class="card-title" style="justify-content:space-between;">
+            <span style="display:flex;align-items:center;gap:8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                Historial
+                <span style="font-size:11px;color:var(--text3);font-weight:500;text-transform:none;letter-spacing:0;" id="hist-count">(0)</span>
+            </span>
+            <button class="btn btn-s btn-sm" onclick="clearHist()" style="font-size:11px;">Limpiar</button>
+        </div>
+        <div class="hist-list" id="hist-list">
+            <div class="hist-empty">Aún no has generado contraseñas</div>
+        </div>
+        <div class="hist-actions">
+            <button class="btn btn-s btn-sm btn-f" onclick="exportHist('csv')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                CSV
+            </button>
+            <button class="btn btn-s btn-sm btn-f" onclick="exportHist('json')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+                JSON
+            </button>
+            <button class="btn btn-s btn-sm btn-f" onclick="exportHist('txt')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                TXT
+            </button>
+            <button class="btn btn-s btn-sm btn-f" onclick="copyAllHist()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/></svg>
+                Copiar
+            </button>
+        </div>
+    </div>
+
+    <!-- === BREACH CHECKER (INDEPENDIENTE) === -->
+    <div class="card" id="check-card">
+        <div class="card-title">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            ¿Tu contraseña ha sido filtrada? Verifícala aquí
+        </div>
+        <p style="font-size:14px;color:var(--text2);margin-bottom:16px;">Escribe cualquier contraseña para saber si aparece en filtraciones conocidas. Miles de millones de contraseñas se han filtrado en ataques a grandes empresas — comprueba la tuya ahora.</p>
+
+        <div class="check-input-row">
+            <div class="check-input-wrap">
+                <input type="password" class="check-input" id="check-pw-input" placeholder="Escribe tu contraseña..." oninput="liveCheckStrength()" onkeydown="if(event.key==='Enter')checkCustomPassword()">
+                <button class="check-eye" onclick="togglePwVisibility()" title="Mostrar/ocultar" aria-label="Mostrar u ocultar contraseña">
+                    <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                    <svg id="eye-closed" style="display:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
+                </button>
+            </div>
+            <button class="btn btn-p" onclick="checkCustomPassword()" id="check-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                Verificar
+            </button>
+        </div>
+
+        <!-- Strength bar for typed password -->
+        <div id="check-strength" style="display:none;margin-bottom:12px;"></div>
+
+        <div class="breach-result" id="check-pw-result"></div>
+
+        <div class="check-note">
+            <strong>🔐 ¿Cómo funciona?</strong> Usamos la API de <strong>Have I Been Pwned</strong> con el sistema de <strong>k-anonymidad</strong>: tu contraseña se convierte en un hash SHA-1, y solo se envían los <strong>primeros 5 caracteres</strong> del hash a un servidor externo. La contraseña completa <strong>nunca abandona tu navegador</strong> — ni siquiera los 5 caracteres del hash son suficientes para reconstruirla.
+            <br>
+            <span class="check-hint">Ejemplo: "queiertys" aparecerá como comprometida. Presiona Enter o el botón para verificar.</span>
+        </div>
+    </div>
+
+    <!-- AD SLOT -->
+    <div class="ad-slot" id="ad-slot-1">
+        <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->
+        Publicidad
+    </div>
+
+</main>
+
+<!-- FAQ -->
+<section class="wrap faq">
+    <h2>Preguntas Frecuentes</h2>
+    <div class="faq-item open">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Es seguro usar este generador? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></button>
+        <div class="faq-a"><p>Sí, 100% seguro. Toda la generación se realiza en tu navegador usando la <strong>Web Crypto API</strong> (la misma criptografía que usan los bancos). Ninguna contraseña se envía, almacena o transmite a ningún servidor.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Qué es un passphrase y por qué es mejor? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></button>
+        <div class="faq-a"><p>Un passphrase es una contraseña compuesta de palabras (ej: <em>correct-horse-battery-staple</em>). Es más fácil de recordar y, paradoxalmente, más segura que contraseñas cortas con caracteres aleatorios. Un passphrase de 5 palabras tiene más de 70 bits de entropía.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Qué es la verificación de brechas (HIBP)? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></button>
+        <div class="faq-a"><p>Usamos la API de <strong>Have I Been Pwned</strong> con k-anonymidad: solo enviamos los primeros 5 caracteres del hash SHA-1 de tu contraseña. Nunca se envía la contraseña completa. Si aparece en filtraciones conocidas, te avisamos.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Cuántos bits de entropía necesito? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></button>
+        <div class="faq-a"><p><strong>60+ bits</strong>: aceptable para contraseñas no críticas. <strong>80+ bits</strong>: recomendado para la mayoría de usos. <strong>100+ bits</strong>: ultra seguro, prácticamente indestructible. Nuestro generador alcanza fácilmente 100+ bits con 20 caracteres.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Los datos se guardan en algún sitio? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></button>
+        <div class="faq-a"><p>El historial se guarda localmente en tu navegador (localStorage) y <strong>nunca sale de tu dispositivo</strong>. Puedes borrarlo en cualquier momento con el botón "Limpiar". Al cerrar el historial del navegador se eliminará también.</p></div>
+    </div>
+</section>
+
+<!-- === PRIVACIDAD Y MARCO LEGAL === -->
+<section class="wrap">
+    <div class="card privacy">
+        <div class="card-title">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            Compromiso de Privacidad y Marco Legal
+        </div>
+
+        <span class="privacy-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            Privacidad verificada
+        </span>
+
+        <div class="privacy-guarantee">
+            <p><strong>Tus contraseñas NUNCA salen de tu navegador.</strong> Esto no es una promesa, es una realidad técnica: la generación de contraseñas se realiza íntegramente en tu dispositivo mediante la <strong>Web Crypto API</strong> — la misma criptografía de nivel bancario. <strong>No recopilamos, no almacenamos, no enviamos ni compartimos</strong> ninguna contraseña generada ni introducida el esta web, nunca, bajo ninguna circunstancia.</p>
+        </div>
+
+        <p>Creemos que la privacidad no es un lujo: es un <strong>derecho fundamental</strong> protegido por las principales legislaciones internacionales. La recopilación de contraseñas sin consentimiento explícito no es solo una mala práctica, es <strong>ilegal</strong> en la mayoría de jurisdicciones. Estos son algunos de los marcos legales que nos comprometemos a cumplir en su totalidad:</p>
+
+        <ul class="laws-list">
+            <li>
+                <span class="law-name"><span class="law-key">UE</span>Reglamento General de Protección de Datos (RGPD / GDPR) — Reglamento UE 2016/679</span>
+                <span class="law-desc"><a href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679" target="_blank" rel="noopener">Art. 5</a> (principios del tratamiento: licitud, lealtad y transparencia) · <a href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679" target="_blank" rel="noopener">Art. 6</a> (el tratamiento solo es lícito con consentimiento u otra base jurídica) · <a href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679" target="_blank" rel="noopener">Arts. 32-34</a> (seguridad del tratamiento y notificación de brechas) · <a href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679" target="_blank" rel="noopener">Art. 83</a> (multas de hasta 20 millones de € o 4% del facturación global anual por infracciones). Una contraseña es un <em>dato personal</em> según el Art. 4.1: recopilarla sin base legal constituye una infracción grave.</span>
+            </li>
+            <li>
+                <span class="law-name"><span class="law-key">ES</span>Ley Orgánica 3/2018 de Protección de Datos Personales y Garantía de los Derechos Digitales (LOPDGDD)</span>
+                <span class="law-desc"><a href="https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673" target="_blank" rel="noopener">Art. 9</a> (seguridad de los datos personales) · <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673" target="_blank" rel="noopener">Arts. 90-96</a> (medidas de seguridad, comunicación de brechas y régimen sancionador de hasta 20 millones de €). Refrenda el RGPD en el ordenamiento jurídico español.</span>
+            </li>
+            <li>
+                <span class="law-name"><span class="law-key">US</span>California Consumer Privacy Act (CCPA) — Cal. Civ. Code §1798.100 y ss.</span>
+                <span class="law-desc"><a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener">§1798.100</a> (derecho a saber qué datos personales se recopilan) · <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener">§1798.150</a> (derecho a demandar por el uso indebido de datos personales sometidos a salvaguardas de seguridad no razonables, con daños de 100 a 750 $ por consumidor y por incidente).</span>
+            </li>
+            <li>
+                <span class="law-name"><span class="law-key">COE</span>Convenio 108 del Consejo de Europa para la Protección de las Personas respecto al Tratamiento Automatizado de Datos</span>
+                <span class="law-desc"><a href="https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=108" target="_blank" rel="noopener">Art. 7</a> (medidas de seguridad apropiadas para proteger los datos personales contra la destrucción accidental o ilícita, pérdida accidental o el acceso, modificación o difusión no autorizados). Primer tratado internacional vinculante de protección de datos.</span>
+            </li>
+            <li>
+                <span class="law-name"><span class="law-key">ES</span>Ley 34/2002 de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI)</span>
+                <span class="law-desc"><a href="https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758" target="_blank" rel="noopener">Art. 21</a> (prohibición de enviar comunicaciones comerciales no solicitadas sin consentimiento). Refuerza que ningún dato personal recopilado puede ser utilizado con fines de publicidad o comercialización sin tu autorización explícita.</span>
+            </li>
+        </ul>
+
+        <div class="data-rights">
+            <div class="right-item"><span class="ri-ico">👁️</span><span class="ri-txt">Acceso<br><small style="color:var(--text3);">RGPD Art. 15</small></span></div>
+            <div class="right-item"><span class="ri-ico">✏️</span><span class="ri-txt">Rectificación<br><small style="color:var(--text3);">RGPD Art. 16</small></span></div>
+            <div class="right-item"><span class="ri-ico">🗑️</span><span class="ri-txt">Supresión<br><small style="color:var(--text3);">RGPD Art. 17</small></span></div>
+            <div class="right-item"><span class="ri-ico">📦</span><span class="ri-txt">Portabilidad<br><small style="color:var(--text3);">RGPD Art. 20</small></span></div>
+            <div class="right-item"><span class="ri-ico">🧊</span><span class="ri-txt">Limitación<br><small style="color:var(--text3);">RGPD Art. 18</small></span></div>
+            <div class="right-item"><span class="ri-ico">🚫</span><span class="ri-txt">Oposición<br><small style="color:var(--text3);">RGPD Art. 21</small></span></div>
+        </div>
+
+        <div class="privacy-final">
+            <p>Ni esta web ni ninguno de sus componentes recopilan contraseñas. Como mínimo princio de diseño, esta herramienta es <strong>"privacy by design"</strong>: si no hay datos que recopilar, no hay datos que proteger. Puedes verificar esto en cualquier momento con las herramientas de desarrollador de tu navegador (pestaña <em>Network</em>): durante la generación de contraseñas no se realiza <strong>ninguna</strong> petición de red.</p>
+        </div>
+    </div>
+</section>
+
+<!-- GUIDES -->
+<section class="wrap" id="guias">
+    <h2 class="guides-h2">Guías y artículos</h2>
+    <p class="guides-sub">Aprende a proteger tus cuentas con estas guías prácticas.</p>
+
+    <a class="guide" href="como-crear-contraseña-segura.html">
+        <div class="guide-ico"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg></div>
+        <h3>Cómo crear una contraseña segura en 2026</h3>
+        <p>Entropía, las 5 reglas de oro, errores que debes evitar y cómo crear contraseñas que ni un superordenador pueda romper.</p>
+        <span class="guide-more">Leer guía →</span>
+    </a>
+
+    <a class="guide" href="que-es-passphrase.html">
+        <div class="guide-ico"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 5.625c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg></div>
+        <h3>Qué es un passphrase y por qué es más seguro</h3>
+        <p>Una frase de varias palabras fácil de recordar y muchísimo más difícil de hackear que tu contraseña actual. Con ejemplos.</p>
+        <span class="guide-more">Leer guía →</span>
+    </a>
+
+    <a class="guide" href="verificar-contraseña-filtrada.html">
+        <div class="guide-ico"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg></div>
+        <h3>Cómo saber si tu contraseña ha sido filtrada</h3>
+        <p>Comprueba si tu contraseña aparece en filtraciones conocidas con k-anonimidad y aprende qué hacer si así es.</p>
+        <span class="guide-more">Leer guía →</span>
+    </a>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="brand-logo"><img src="img/logo-pgosecure.png" alt="PGOsecure logo"></span>
+                <div>
+                    <strong>PGOsecure</strong>
+                    <span class="f-tag">Generador de contraseñas seguras.<br>Herramienta gratuita y de código abierto.</span>
+                </div>
+            </div>
+            <div class="footer-links" style="display:flex;gap:56px;flex-wrap:wrap;">
+                <div class="footer-col">
+                    <span class="footer-h">Producto</span>
+                    <a href="index.html">Generador</a>
+                    <a href="#check-card">Verificador de filtraciones</a>
+                    <a href="#guias">Guías y tutoriales</a>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-h">Legal</span>
+                    <a href="aviso-legal.html">Aviso Legal</a>
+                    <a href="politica-privacidad.html">Política de Privacidad</a>
+                    <a href="politica-cookies.html">Política de Cookies</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PGOsecure &mdash; pgosecure.netlify.app</p>
+            <p class="footer-trust"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>Tus contraseñas se generan en tu navegador y nunca salen de tu dispositivo.</p>
+        </div>
+    </div>
+</footer>
+
+<div class="toast" id="toast"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span id="toast-text"></span></div>
+
+<div class="cookie-banner hidden" id="cookie-banner">
+    <p>🍪 Usamos cookies técnicas para el funcionamiento de la web y, <strong>solo si las aceptas</strong>, cookies de terceros (Google AdSense) para mostrar publicidad. <a href="politica-cookies.html" target="_blank" rel="noopener">Más información</a></p>
+    <div class="cookie-btns">
+        <button class="cb-accept" onclick="setConsent('accepted')">Aceptar todas</button>
+        <button class="cb-reject" onclick="setConsent('rejected')">Solo esenciales</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// ===== HELPERS =====
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+const cryptoRand=(min,max)=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%(max-min+1)+min;};
+const pick=a=>a[cryptoRand(0,a.length-1)];
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const escJ=s=>s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+
+// ===== STATE =====
+const S={
+    mode:'random',
+    length:20, upper:true, lower:true, digits:true, symbols:true, noAmbig:false,
+    words:5, wordlist:'es', sep:'-', capWords:true, addNumber:false, leet:false, customWords:[],
+    pattern:[], patRep:2,
+    pronLen:14, pronUpper:true, pronNums:false, pronSymb:false,
+    wifiLen:16, ssid:'MiRedWiFi',
+    pinLen:6, pinNoRepeat:false,
+    multi:1,
+    current:'',
+    currentWords:[],
+    history:JSON.parse(localStorage.getItem('sp_hist')||'[]'),
+    favs:JSON.parse(localStorage.getItem('sp_favs')||'[]'),
+    dark:localStorage.getItem('sp_theme')!=='light',
+    stats:{total:0,bits:0,strongest:0,modes:{}}
+};
+
+// ===== AMBIGUOUS CHAR SETS =====
+const AMBIG_UPPER='OIl';
+const AMBIG_LOWER='lo';
+const AMBIG_DIGITS='01';
+const AMBIG_SYMBOLS='|`~';
+
+// ===== LEET MAP =====
+const LEET_MAP={'a':'4','b':'8','e':'3','g':'6','i':'1','l':'1','o':'0','s':'5','t':'7','z':'2'};
+function toLeet(word){
+    return word.split('').map(c=>LEET_MAP[c.toLowerCase()]?LEET_MAP[c.toLowerCase()]:c).join('');
+}
+
+// ===== WORD LISTS =====
+const WORDS={
+es:['casa','sol','mar','luna','estrella','rio','montana','bosque','cielo','tierra','fuego','viento','lluvia','nube','flor','arbol','piedra','arena','onda','sombra','luz','color','musica','sueno','camino','puente','ventana','puerta','libro','ciudad','jardin','fuente','moneda','pluma','llave','reloj','mano','ojo','corazon','alma','viento','fuerza','saber','verdad','sueño','amor','paz','vida','instante','horizonte','destino','silencio','aventura','misterio','legado','triunfo','nobleza','valentia','serenidad','melodia','armonia','profundo','infinito','eterno','divino','magico','brillante','radiante','esplendido','majestuoso','glorioso','magnifico','sublime','imperial','celestial','cosmico','nuclear','cuantico','binario','digital','global','cosmica','lunar','solar','terrestre','centauro','nebulosa','galaxia','cometa','meteoro','asteroide','satelite','planeta','universo'],
+en:['apple','river','stone','flame','ocean','cloud','storm','dream','light','night','shadow','crystal','thunder','forest','meadow','breeze','castle','tower','bridge','garden','silver','golden','crimson','azure','violet','scarlet','emerald','sapphire','diamond','marble','velvet','cotton','silk','iron','steel','copper','bronze','cobalt','nickel','titanium','carbon','oxygen','helium','plasma','photon','proton','neutron','quark','cipher','matrix','vector','tensor','oracle','phoenix','dragon','griffin','pegasus','unicorn','kraken','hydra','minotaur','chimera','sphinx','titan','giant','colossus','leviathan','behemoth','serpent','panther','falcon','eagle','wolf','tiger','lion','bear','hawk','raven','cobra','python'],
+eff:['correct','horse','battery','staple','pencil','giraffe','rocket','cactus','dolphin','rainbow','bicycle','telescope','umbrella','chocolate','cathedral','dinosaur','elephant','factory','guitar','hospital','igloo','jellyfish','kangaroo','lobster','microscope','notebook','octopus','pineapple','quilt','raincoat','sandwich','telephone','umbrella','violin','xylophone','yellow','zeppelin','abstract','boundary','cabinet','decimal','episode','fixture','graphic','harvest','imagine','justice','keynote','library','mystery','network','observe','preview','quality','realize','scatter','therapy','uniform','voucher','warrior','alchemy','balance','cascade','descent','enchant','frosty','glacier','horizon','imprint','jasmine','kinetic','lantern','mystic','nomad','orbits','prism','quantum','riddle','summit','threshold','utopia','vortex','whisper','zenith','ancient','bizarre','cunning','daring','elegant','fierce','gentle','humble','intense','jovial','keen','lively','mellow','noble','optimist','placid','quick','robust','serene','tenacious','unfazed','vivid','witty','xenial','youthful','zealous'],
+};
+const VOWELS='aeiou';
+const CONSONANTS='bcdfghjklmnpqrstvwxyz';
+
+// ===== MODE TABS =====
+function switchMode(mode){
+    S.mode=mode;
+    $$('.tab').forEach(t=>t.classList.toggle('active',t.dataset.mode===mode));
+    $$('.mode-panel').forEach(p=>p.classList.remove('active'));
+    $('#panel-'+mode).classList.add('active');
+    if(mode==='pattern')buildPattern();
+    gen();
+}
+
+// ===== OPTIONS =====
+function togOpt(el,key){
+    el.classList.toggle('on');
+    S[key]=el.classList.contains('on');
+    gen();
+}
+function setWL(el,wl){
+    $$('.wordlist-sel .wl-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    S.wordlist=wl;
+    gen();
+}
+function setSep(el,sep){
+    el.parentElement.querySelectorAll('.wl-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    S.sep=sep;
+    gen();
+}
+
+// ===== PATTERN BUILDER =====
+const PAT_TOKENS=[
+    {id:'u',label:'A-Z',cls:'c-u'},{id:'l',label:'a-z',cls:'c-l'},{id:'n',label:'0-9',cls:'c-n'},{id:'s',label:'!@#',cls:'c-s'},
+];
+function buildPattern(){
+    const b=$('#pattern-builder');
+    b.innerHTML='';
+    PAT_TOKENS.forEach(t=>{
+        const el=document.createElement('button');
+        el.className='p-token'+(S.pattern.includes(t.id)?' active':'');
+        el.textContent=t.label;
+        el.onclick=()=>{S.pattern.includes(t.id)?S.pattern.splice(S.pattern.indexOf(t.id),1):S.pattern.push(t.id);el.classList.toggle('active');updatePatternPreview();gen();};
+        b.appendChild(el);
+    });
+    updatePatternPreview();
+}
+function updatePatternPreview(){
+    const p=$('#pattern-preview');
+    if(!S.pattern.length){p.innerHTML='Haz clic en los tokens de arriba para construir tu patrón';p.style.color='var(--text3)';return;}
+    const map={u:'A-Z',l:'a-z',n:'0-9',s:'!@#'};
+    let html='';
+    for(let r=0;r<S.patRep;r++){
+        if(r)html+='<span style="color:var(--text3);margin:0 4px;">+</span>';
+        S.pattern.forEach((t,i)=>{
+            if(i)html+='<span style="color:var(--text3);margin:0 2px;">·</span>';
+            html+=`<span class="${t==='u'?'c-u':t==='l'?'c-l':t==='n'?'c-n':'c-s'}">${map[t]}</span>`;
+        });
+    }
+    p.innerHTML=`<span style="color:var(--text3);font-size:12px;margin-right:6px;">=</span> ${html}`;
+    p.style.color='';
+}
+
+// ===== CHARSETS =====
+function rndChar(pool){return pool[cryptoRand(0,pool.length-1)];}
+function rndUpper(){return rndChar('ABCDEFGHIJKLMNOPQRSTUVWXYZ');}
+function rndLower(){return rndChar('abcdefghijklmnopqrstuvwxyz');}
+function rndDigit(){return rndChar('0123456789');}
+function rndSymbol(){return rndChar('!@#$%^&*()_+-=[]{}|;:,.<>?');}
+
+function getCharset(){
+    let c='';
+    if(S.upper)c+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if(S.lower)c+='abcdefghijklmnopqrstuvwxyz';
+    if(S.digits)c+='0123456789';
+    if(S.symbols)c+='!@#$%^&*()_+-=[]{}|;:,.<>?';
+    if(S.noAmbig){
+        c=c.split('').filter(ch=>!(AMBIG_UPPER.includes(ch)||AMBIG_LOWER.includes(ch)||AMBIG_DIGITS.includes(ch)||AMBIG_SYMBOLS.includes(ch))).join('');
+    }
+    return c;
+}
+
+// ===== GENERATORS =====
+function genRandom(len,charset){
+    if(!charset)charset=getCharset();
+    if(!charset)charset='abcdefghijklmnopqrstuvwxyz';
+    const a=new Uint32Array(len);
+    crypto.getRandomValues(a);
+    return Array.from(a,v=>charset[v%charset.length]).join('');
+}
+
+function genPassphrase(){
+    const wl=WORDS[S.wordlist]||WORDS.es;
+    const words=[];
+    const pool=S.customWords.length?S.customWords:wl;
+    for(let i=0;i<S.words;i++){
+        let w=pick(pool);
+        if(S.leet)w=toLeet(w);
+        words.push(S.capWords?w.charAt(0).toUpperCase()+w.slice(1):w);
+    }
+    S.currentWords=words;
+    let result=words.join(S.sep);
+    if(S.addNumber) result+=S.sep+cryptoRand(10,999);
+    return result;
+}
+
+function genWifi(){
+    // WiFi WPA2 keys: letters+digits, 8-63 chars
+    const c='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%^&*';
+    const a=new Uint32Array(S.wifiLen);
+    crypto.getRandomValues(a);
+    return Array.from(a,v=>c[v%c.length]).join('');
+}
+
+function genPin(){
+    let pin='';
+    for(let i=0;i<S.pinLen;i++){
+        let d;
+        do{d=cryptoRand(0,9);}while(S.pinNoRepeat&&i>0&&String(d)===pin[pin.length-1]);
+        pin+=d;
+    }
+    return pin;
+}
+
+function genPattern(){
+    if(!S.pattern.length){S.pattern=['u','l'];buildPattern();}
+    const pools={u:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',l:'abcdefghijklmnopqrstuvwxyz',n:'0123456789',s:'!@#$%^&*()_+-='};
+    let result='';
+    for(let r=0;r<S.patRep;r++) S.pattern.forEach(t=>{result+=rndChar(pools[t]);});
+    return result;
+}
+
+function genPronounceable(){
+    let result='';
+    const len=S.pronLen;
+    for(let i=0;i<len;i++){
+        if(i%2===0) result+=pick(CONSONANTS);
+        else result+=pick(VOWELS);
+    }
+    if(S.pronUpper) result=result.charAt(0).toUpperCase()+result.slice(1);
+    if(S.pronNums) result+=cryptoRand(10,99);
+    if(S.pronSymb) result+=pick('!@#$%&*');
+    return result;
+}
+
+// ===== MAIN GEN =====
+function gen(){
+    let pw;
+    switch(S.mode){
+        case 'random': pw=genRandom(S.length); break;
+        case 'passphrase': pw=genPassphrase(); break;
+        case 'pattern': pw=genPattern(); break;
+        case 'pronounceable': pw=genPronounceable(); break;
+        case 'wifi': pw=genWifi(); break;
+        case 'pin': pw=genPin(); break;
+        default: pw=genRandom(S.length);
+    }
+    S.current=pw;
+    displayPw(pw);
+    updateStats(pw);
+    genMulti();
+    updateFavIcon();
+    if(S.mode==='wifi')updateWifi(pw);
+    else if(S.mode==='passphrase')renderWordChips();
+    else if(S.mode==='pin')updatePinDisplay();
+    updateSessionStats();
+    $('#breach-result').className='breach-result';
+    $('#breach-result').style.display='none';
+}
+
+function displayPw(pw){
+    const d=$('#pw-display');
+    let html='';
+    const isPassphrase=S.mode==='passphrase';
+    for(let i=0;i<pw.length;i++){
+        const c=pw[i];
+        let cls='c-l';
+        if(isPassphrase){if(c===S.sep.charAt(0)||c==='.')cls='c-w';else if(c===c.toUpperCase()&&c!==c.toLowerCase())cls='c-u';}
+        else{
+            if('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.includes(c))cls='c-u';
+            else if('abcdefghijklmnopqrstuvwxyz'.includes(c))cls='c-l';
+            else if('0123456789'.includes(c))cls='c-n';
+            else cls='c-s';
+        }
+        html+=`<span class="${cls}">${esc(c)}</span>`;
+    }
+    d.innerHTML=html;
+}
+
+// ===== STATS =====
+function updateStats(pw){
+    // Char distribution
+    let u=0,l=0,n=0,s=0;
+    for(const c of pw){
+        if('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.includes(c))u++;
+        else if('abcdefghijklmnopqrstuvwxyz'.includes(c))l++;
+        else if('0123456789'.includes(c))n++;
+        else s++;
+    }
+    const total=u+l+n+s||1;
+    const dist=$('#char-dist');
+    dist.innerHTML=`<span style="width:${u/total*100}%;background:#60a5fa;"></span><span style="width:${l/total*100}%;background:var(--text3);"></span><span style="width:${n/total*100}%;background:#fbbf24;"></span><span style="width:${s/total*100}%;background:#f87171;"></span>`;
+    $('#dist-legend').innerHTML=`<span><span class="dot" style="background:#60a5fa;"></span>${u} mayús</span><span><span class="dot" style="background:var(--text3);"></span>${l} minús</span><span><span class="dot" style="background:#fbbf24;"></span>${n} nums</span><span><span class="dot" style="background:#f87171;"></span>${s} símb</span>`;
+    $('#char-counters').innerHTML=`<span class="counter-pill cp-u"><span class="num">${u}</span> A-Z</span><span class="counter-pill cp-l"><span class="num">${l}</span> a-z</span><span class="counter-pill cp-n"><span class="num">${n}</span> 0-9</span><span class="counter-pill cp-s"><span class="num">${s}</span> !@#</span>`;
+
+    // Entropy
+    let poolSize=0;
+    if(S.mode==='pin'){poolSize=10;}
+    else if(S.mode==='wifi'){poolSize=64;}
+    else{
+        if(S.upper)poolSize+=26;if(S.lower)poolSize+=26;if(S.digits)poolSize+=10;if(S.symbols)poolSize+=28;
+        if(poolSize===0)poolSize=26;
+    }
+    const entropy=Math.floor(pw.length*Math.log2(poolSize));
+    $('#ent-bits').textContent=entropy+' bits';
+    $('#ent-charset').textContent=poolSize+' chars';
+    const combos=Math.pow(2,entropy);
+    if(combos>1e30)$('#ent-combos').textContent='>10^'+Math.floor(Math.log10(combos));
+    else if(combos>1e6)$('#ent-combos').textContent=(combos/1e6).toFixed(0)+'M';
+    else if(combos>1e3)$('#ent-combos').textContent=(combos/1e3).toFixed(0)+'K';
+    else $('#ent-combos').textContent=combos.toFixed(0);
+
+    // Crack time (assuming 10 billion guesses/sec)
+    const guessesPerSec=1e10;
+    const seconds=Math.pow(2,entropy)/guessesPerSec;
+    $('#ent-crack').textContent=formatTime(seconds);
+    $('#ent-crack').style.fontSize='14px';
+
+    // Strength bar
+    updateStrength(entropy);
+
+    // Crack-time comparison vs common passwords
+    renderCrackCompare(entropy);
+    renderAnalogy(entropy,pw.length,poolSize);
+}
+
+const COMMON_PW=[
+    {label:'123456',bits:19},
+    {label:'password',bits:37},
+    {label:'contraseña',bits:37},
+    {label:'qwerty123',bits:40},
+    {label:'iloveyou',bits:39},
+    {label:'miperro123',bits:52}
+];
+function crackSeconds(bits){return Math.pow(2,bits)/1e10;}
+function renderCrackCompare(myBits){
+    const box=$('#crack-compare');
+    if(!box)return;
+    const rows=COMMON_PW.concat([{label:'Tu contraseña',bits:myBits,isMine:true}]).sort((a,b)=>a.bits-b.bits);
+    const maxBits=Math.max(...rows.map(r=>r.bits),1);
+    const sorted=rows.map(r=>{
+        const s=crackSeconds(r.bits);
+        const t=formatTime(s);
+        const short=Math.min(t.length,18);
+        return {label:r.label,short,t,raw:s,bits:r.bits,isMine:r.isMine};
+    }).sort((a,b)=>a.bits-b.bits);
+    box.innerHTML=sorted.map(r=>{
+        const pct=Math.max(2,(r.bits/maxBits)*100);
+        const barColor=r.isMine?'var(--accent)':(r.raw<1? 'var(--danger)':r.raw<31536000?'var(--warning)':'var(--text3)');
+        const mark=r.isMine?'<strong style="color:var(--accent2);">★ </strong>':'';
+        return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12px;">
+            <span style="width:130px;flex-shrink:0;color:${r.isMine?'var(--accent2)':'var(--text2)'};font-weight:${r.isMine?'700':'500'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;">${mark}${r.label}</span>
+            <div style="flex:1;height:16px;background:var(--bg-input);border-radius:6px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:${barColor};border-radius:6px;transition:width .4s;"></div></div>
+            <span style="width:110px;flex-shrink:0;color:var(--text2);font-family:var(--mono);font-size:11px;text-align:left;">${r.short}</span>
+        </div>`;
+    }).join('');
+}
+function renderAnalogy(bits,len,poolSize){
+    const el=$('#ent-analogy');
+    if(!el)return;
+    let txt;
+    if(bits<40)txt='😬 Tu contraseña es <strong>débil</strong>: un ordenador doméstico la descifraría mientras tomas un café. ¡Genera una más larga!';
+    else if(bits<60)txt='🙂 Nivel <strong>aceptable</strong>: un atacante tardaría meses en romperla, pero con recursos suficientes aún es posible.';
+    else if(bits<80)txt='😎 <strong>Fuerte</strong>: se necesitaría una flota de superordenadores durante siglos. Equivale a adivinar una de entre un número mayor que los granos de arena de todas las playas del planeta.';
+    else if(bits<100)txt='🛡️ <strong>Muy fuerte</strong>: descifrarla por fuerza bruta tardaría más tiempo que la vida del Universo (13.800 millones de años).';
+    else txt='👑 <strong>Ultra segura</strong>: una fuerza bruta necesitaría un tiempo superior al del Universo observable. Está al nivel de la criptografía militar.';
+    el.innerHTML=txt;
+}
+
+function updateStrength(entropy){
+    const fill=$('#pw-display');
+    let level,color,width;
+    if(entropy<40){level='Débil';color='var(--danger)';width='20%';}
+    else if(entropy<60){level='Regular';color='var(--warning)';width='40%';}
+    else if(entropy<80){level='Fuerte';color='var(--cyan)';width='65%';}
+    else if(entropy<100){level='Muy Fuerte';color='var(--accent2)';width='85%';}
+    else{level='Ultra Segura';color='var(--success)';width='100%';}
+    // I'll create a strength bar under the display
+    let bar=$('#str-bar-custom');
+    if(!bar){
+        bar=document.createElement('div');
+        bar.id='str-bar-custom';
+        bar.style.cssText='margin-top:14px;';
+        bar.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;">Fortaleza</span><span id="str-level" style="font-size:12px;font-weight:700;padding:2px 10px;border-radius:50px;"></span></div><div style="height:5px;background:var(--bg-input);border-radius:10px;overflow:hidden;"><div id="str-fill" style="height:100%;border-radius:10px;transition:width .5s cubic-bezier(.4,0,.2,1),background .3s;"></div></div>`;
+        fill.parentElement.appendChild(bar);
+    }
+    $('#str-fill').style.width=width;
+    $('#str-fill').style.background=color;
+    $('#str-level').textContent=level;
+    $('#str-level').style.color=color;
+    $('#str-level').style.background=color+'18';
+}
+
+function formatTime(s){
+    if(s<1) return 'Instantáneo';
+    if(s<60) return Math.floor(s)+'s';
+    if(s<3600) return Math.floor(s/60)+' min';
+    if(s<86400) return Math.floor(s/3600)+'h';
+    if(s<31536000) return Math.floor(s/86400)+' días';
+    const y=s/31536000;
+    if(y<1e3) return Math.floor(y)+' años';
+    if(y<1e6) return (y/1e3).toFixed(1)+'K años';
+    if(y<1e9) return (y/1e6).toFixed(1)+'M años';
+    if(y<1e12) return (y/1e9).toFixed(1)+'B años';
+    return '>10^'+Math.floor(Math.log10(y))+' años';
+}
+
+// ===== MULTI =====
+function genMulti(){
+    const list=$('#multi-list');
+    list.innerHTML='';
+    if(S.multi<=1)return;
+    for(let i=0;i<S.multi;i++){
+        let pw;
+        switch(S.mode){
+            case 'random': pw=genRandom(S.length); break;
+            case 'passphrase': pw=genPassphrase(); break;
+            case 'pattern': pw=genPattern(); break;
+            case 'pronounceable': pw=genPronounceable(); break;
+            case 'wifi': pw=genWifi(); break;
+            case 'pin': pw=genPin(); break;
+        }
+        const item=document.createElement('div');
+        item.className='hist-item';
+        item.style.animationDelay=i*30+'ms';
+        item.innerHTML=`<div class="hist-str" style="background:var(--accent);"></div><span class="hist-pw">${esc(pw)}</span><button class="hist-btn" onclick="copySingle('${escJ(pw)}')" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/></svg></button>`;
+        list.appendChild(item);
+    }
+}
+
+// ===== COPY =====
+function copyPw(){copySingle(S.current);addHist(S.current);}
+function copySingle(text){
+    navigator.clipboard.writeText(text).then(()=>toast('Copiado al portapapeles ✓')).catch(()=>{
+        const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+        toast('Copiado al portapapeles ✓');
+    });
+}
+
+// ===== HISTORY =====
+function addHist(pw){
+    if(S.history[0]&&S.history[0].pw===pw)return;
+    S.history.unshift({pw,time:Date.now(),mode:S.mode,len:pw.length});
+    if(S.history.length>100)S.history.pop();
+    localStorage.setItem('sp_hist',JSON.stringify(S.history));
+    renderHist();
+}
+function renderHist(){
+    const list=$('#hist-list');
+    const count=$('#hist-count');
+    count.textContent=`(${S.history.length})`;
+    if(!S.history.length){list.innerHTML='<div class="hist-empty">Aún no has generado contraseñas</div>';return;}
+    list.innerHTML='';
+    S.history.forEach((h,i)=>{
+        const t=timeAgo(h.time);
+        const item=document.createElement('div');
+        item.className='hist-item';
+        item.style.animationDelay=i*20+'ms';
+        item.innerHTML=`
+            <div class="hist-str" style="background:${h.mode==='passphrase'?'var(--cyan)':h.mode==='pattern'?'var(--orange)':h.mode==='pronounceable'?'var(--warning)':'var(--accent2)'}"></div>
+            <span class="hist-pw">${esc(h.pw)}</span>
+            <span class="hist-meta"><span>${t}</span><span style="text-transform:capitalize;">${h.mode}</span></span>
+            <button class="hist-btn" onclick="copySingle('${escJ(h.pw)}')" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/></svg></button>`;
+        list.appendChild(item);
+    });
+}
+function clearHist(){S.history=[];localStorage.removeItem('sp_hist');renderHist();toast('Historial limpiado');}
+function timeAgo(ts){
+    const d=Date.now()-ts;
+    if(d<60000)return 'ahora';
+    if(d<3600000)return Math.floor(d/60000)+'m';
+    if(d<86400000)return Math.floor(d/3600000)+'h';
+    return Math.floor(d/86400000)+'d';
+}
+
+// ===== EXPORT =====
+function exportHist(format){
+    if(!S.history.length){toast('No hay contraseñas para exportar',true);return;}
+    let content='',type='',ext=format;
+    const date=new Date().toISOString().slice(0,10);
+    if(format==='csv'){
+        content='Contraseña,Modo,Longitud,Fecha\n';
+        S.history.forEach(h=>{content+=`"${h.pw}",${h.mode},${h.len},${new Date(h.time).toISOString()}\n`;});
+        type='text/csv';
+    }else if(format==='json'){
+        content=JSON.stringify(S.history.map(h=>({password:h.pw,mode:h.mode,length:h.len,created:new Date(h.time).toISOString()})),null,2);
+        type='application/json';
+    }else{
+        content='PGOsecure Export - '+date+'\n'+'='.repeat(40)+'\n\n'+S.history.map((h,i)=>`${i+1}. [${h.mode}] ${h.pw}`).join('\n')+'\n';
+        type='text/plain';
+    }
+    const blob=new Blob([content],{type});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='securepass-export-'+date+'.'+ext;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('Exportado como '+ext.toUpperCase()+' ✓');
+}
+function copyAllHist(){
+    if(!S.history.length){toast('No hay contraseñas para copiar',true);return;}
+    const text=S.history.map(h=>h.pw).join('\n');
+    copySingle(text);
+}
+
+// ===== BREACH CHECK (HIBP) =====
+async function checkBreach(){
+    if(!S.current){toast('Genera una contraseña primero',true);return;}
+    const btn=$('#breach-btn');
+    btn.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;animation:spin 1s linear infinite;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182"/></svg>';
+    const result=$('#breach-result');
+
+    try{
+        const encoder=new TextEncoder();
+        const data=encoder.encode(S.current);
+        const hash=await crypto.subtle.digest('SHA-1',data);
+        const hashHex=Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+        const prefix=hashHex.slice(0,5);
+        const suffix=hashHex.slice(5);
+
+        const resp=await fetch('https://api.pwnedpasswords.com/range/'+prefix);
+        const text=await resp.text();
+        const lines=text.split('\n');
+        let count=0;
+        for(const line of lines){
+            const [hash,qty]=line.split(':');
+            if(hash.trim()===suffix){count=parseInt(qty);break;}
+        }
+
+        result.style.display='flex';
+        if(count>0){
+            result.className='breach-result danger';
+            result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg><div><strong>¡Comprometida!</strong> Esta contraseña aparece en <span class="breach-count">${count.toLocaleString()}</span> filtraciones conocidas.<br><span style="font-weight:400;font-size:12px;opacity:.8;">Genera una nueva contraseña con clic en "Generar".</span></div>`;
+        }else{
+            result.className='breach-result safe';
+            result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg><div><strong>¡Segura!</strong> Esta contraseña no se ha encontrado en ninguna filtración conocida.</div>`;
+        }
+        toast(count>0?'¡Contraseña comprometida!':'Contraseña segura ✓',count>0);
+    }catch(e){
+        result.style.display='flex';
+        result.className='breach-result safe';
+        result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg><div>No se pudo conectar con HIBP. Verifica tu conexión a internet.</div>`;
+    }
+    btn.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>';
+}
+
+// ===== CUSTOM PASSWORD BREACH CHECK =====
+function togglePwVisibility(){
+    const input=$('#check-pw-input');
+    const open=$('#eye-open');
+    const closed=$('#eye-closed');
+    if(input.type==='password'){input.type='text';open.style.display='none';closed.style.display='block';}
+    else{input.type='password';open.style.display='block';closed.style.display='none';}
+}
+function liveCheckStrength(){
+    const pw=$('#check-pw-input').value;
+    const container=$('#check-strength');
+    if(!pw){container.style.display='none';container.innerHTML='';return;}
+    container.style.display='block';
+    let poolSize=0;
+    if(/[A-Z]/.test(pw))poolSize+=26;
+    if(/[a-z]/.test(pw))poolSize+=26;
+    if(/\d/.test(pw))poolSize+=10;
+    if(/[^A-Za-z0-9]/.test(pw))poolSize+=28;
+    if(poolSize===0)poolSize=26;
+    const entropy=Math.floor(pw.length*Math.log2(poolSize));
+    let level,color,width;
+    if(entropy<40){level='Débil';color='var(--danger)';width='20%';}
+    else if(entropy<60){level='Regular';color='var(--warning)';width='40%';}
+    else if(entropy<80){level='Fuerte';color='var(--cyan)';width='65%';}
+    else if(entropy<100){level='Muy Fuerte';color='var(--accent2)';width='85%';}
+    else{level='Ultra Segura';color='var(--success)';width='100%';}
+    container.innerHTML=`
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;">Fortaleza: ${entropy} bits</span>
+            <span style="font-size:11px;font-weight:700;padding:2px 10px;border-radius:50px;color:${color};background:${color}18;">${level}</span>
+        </div>
+        <div style="height:5px;background:var(--bg-input);border-radius:10px;overflow:hidden;">
+            <div style="height:100%;width:${width};background:${color};border-radius:10px;transition:width .4s;"></div>
+        </div>`;
+}
+async function checkCustomPassword(){
+    const input=$('#check-pw-input');
+    const pw=input.value;
+    const result=$('#check-pw-result');
+    const btn=$('#check-btn');
+
+    if(!pw){result.style.display='flex';result.className='breach-result danger';result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg><div><strong>Escribe una contraseña primero</strong> para poder verificarla.</div>`;return;}
+    if(pw.length<3){result.style.display='flex';result.className='breach-result danger';result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg><div><strong>Contraseña demasiado corta.</strong> Mínimo 3 caracteres para verificar.</div>`;return;}
+
+    btn.disabled=true;
+    const originalBtnInner=btn.innerHTML;
+    btn.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;animation:spin 1s linear infinite;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182"/></svg> Verificando...';
+
+    const encoder=new TextEncoder();
+    const data=encoder.encode(pw);
+    const hash=await crypto.subtle.digest('SHA-1',data);
+    const hashHex=Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+    const prefix=hashHex.slice(0,5);
+    const suffix=hashHex.slice(5);
+
+    try{
+        const resp=await fetch('https://api.pwnedpasswords.com/range/'+prefix);
+        const text=await resp.text();
+        const lines=text.split('\n');
+        let count=0;
+        for(const line of lines){
+            const [h,qty]=line.split(':');
+            if(h.trim()===suffix){count=parseInt(qty);break;}
+        }
+        result.style.display='flex';
+        if(count>0){
+            result.className='breach-result danger';
+            result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg><div><strong>⚠️ ¡Peligro! Tu contraseña ha sido filtrada.</strong><br>Aparece en <span class="breach-count">${count.toLocaleString()}</span> filtraciones conocidas.<br><span style="font-weight:400;font-size:12px;opacity:.8;">No la uses. Genera una nueva contraseña segura con nuestro generador (arriba).</span></div>`;
+            toast('⚠️ Contraseña comprometida',true);
+        }else{
+            result.className='breach-result safe';
+            result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg><div><strong>✅ ¡Buenas noticias!</strong><br>Esta contraseña <strong>NO</strong> aparece en ninguna filtración conocida.<br><span style="font-weight:400;font-size:12px;opacity:.8;">Sigue siendo recomendable usar una contraseña larga y única para cada servicio.</span></div>`;
+            toast('Contraseña segura ✓');
+        }
+        // Never store the typed password anywhere
+        input.value='';
+        input.type='password';
+        $('#eye-open').style.display='block';
+        $('#eye-closed').style.display='none';
+        $('#check-strength').style.display='none';
+        $('#check-strength').innerHTML='';
+    }catch(e){
+        result.style.display='flex';
+        result.className='breach-result safe';
+        result.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg><div>No se pudo conectar con HIBP. Verifica tu conexión a internet e inténtalo de nuevo.</div>`;
+    }finally{
+        btn.disabled=false;
+        btn.innerHTML=originalBtnInner;
+    }
+}
+
+// ===== FAVORITES =====
+function toggleFav(){
+    const idx=S.favs.indexOf(S.current);
+    if(idx>-1){S.favs.splice(idx,1);toast('Eliminado de favoritos');}
+    else{S.favs.unshift(S.current);if(S.favs.length>50)S.favs.pop();toast('Guardado en favoritos ★');}
+    localStorage.setItem('sp_favs',JSON.stringify(S.favs));
+    updateFavIcon();
+}
+function updateFavIcon(){
+    const ico=$('#fav-ico');
+    ico.setAttribute('fill',S.favs.includes(S.current)?'currentColor':'none');
+}
+
+// ===== THEME =====
+function toggleTheme(){
+    S.dark=!S.dark;
+    document.body.classList.toggle('light');
+    localStorage.setItem('sp_theme',S.dark?'dark':'light');
+    $('#ico-moon').style.display=S.dark?'block':'none';
+    $('#ico-sun').style.display=S.dark?'none':'block';
+}
+if(!S.dark){document.body.classList.add('light');$('#ico-moon').style.display='none';$('#ico-sun').style.display='block';}
+
+// ===== TOAST =====
+function toast(msg,isErr=false){
+    const t=$('#toast');
+    $('#toast-text').textContent=msg;
+    t.className='toast'+(isErr?' err':'')+' show';
+    clearTimeout(t._t);
+    t._t=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ===== PASSPHRASE CHIPS =====
+function renderWordChips(){
+    const box=$('#word-chips');
+    if(!box||S.mode!=='passphrase')return;
+    box.innerHTML='';
+    S.currentWords.forEach((w,i)=>{
+        const chip=document.createElement('span');
+        chip.className='word-chip';
+        chip.textContent=w;
+        box.appendChild(chip);
+        if(i<S.currentWords.length-1){
+            const sep=document.createElement('span');
+            sep.className='sep';
+            sep.textContent=S.sep||'/';
+            box.appendChild(sep);
+        }
+    });
+}
+function clearCustomWords(){
+    S.customWords=[];
+    $('#custom-words').value='';
+    gen();
+    toast('Palabras personalizadas eliminadas');
+}
+
+// ===== WIFI =====
+function updateWifi(pw){
+    const config='WIFI:T:WPA;S:'+S.ssid.replace(/[\\;,:"]/g,'\\$&')+';P:'+pw.replace(/[\\;,:"]/g,'\\$&')+';;';
+    $('#wifi-config').textContent=config;
+    // QR
+    const qrBox=$('#wifi-qr');
+    if(typeof QRCode!=='undefined'){
+        qrBox.innerHTML='';
+        new QRCode(qrBox,{text:config,width:136,height:136,correctLevel:QRCode.CorrectLevel.M});
+    }else{
+        qrBox.innerHTML='<span style="font-size:11px;color:#888;">Conéctate a internet para generar el QR.<br>(Requiere la librería QR)</span>';
+    }
+}
+function copyWifiConfig(){copySingle($('#wifi-config').textContent);}
+function shareWifi(){
+    const config=$('#wifi-config').textContent;
+    if(navigator.share){
+        navigator.share({title:'Mi red WiFi',text:config}).catch(()=>{});
+    }else{
+        copyWifiConfig();
+        toast('Configuración copiada ✓');
+    }
+}
+
+// ===== PIN DISPLAY =====
+function updatePinDisplay(){
+    // nothing special, password shows in main display; PINs are short so highlight grouping
+    const d=$('#pw-display');
+    if(S.mode==='pin'){
+        // Insert a faint space every 3 digits for readability in the mono display
+        const digits=S.current;
+        const grouped=digits.replace(/(\d{3})(?=\d)/g,'$1<span class="space-dot">&#8202;</span>');
+        d.innerHTML=grouped;
+    }
+}
+
+// ===== SESSION STATS =====
+function updateSessionStats(){
+    S.stats.total++;
+    // bits of current
+    let poolSize=0;
+    if(S.upper)poolSize+=26;if(S.lower)poolSize+=26;if(S.digits)poolSize+=10;if(S.symbols)poolSize+=28;
+    if(S.mode==='pin')poolSize=10;
+    if(S.mode==='wifi')poolSize=64;
+    if(poolSize===0)poolSize=26;
+    const bits=Math.floor(S.current.length*Math.log2(poolSize));
+    S.stats.bits+=bits;
+    if(bits>S.stats.strongest)S.stats.strongest=bits;
+    S.stats.modes[S.mode]=(S.stats.modes[S.mode]||0)+1;
+    renderStats();
+}
+function renderStats(){
+    $('#st-total').textContent=S.stats.total;
+    $('#st-bits').textContent=S.stats.bits.toLocaleString();
+    $('#st-strongest').textContent=S.stats.strongest?S.stats.strongest+' bits':'--';
+    $('#st-strongest').style.fontSize='14px';
+    const modesUsed=Object.keys(S.stats.modes).length;
+    $('#st-modes').textContent=modesUsed;
+    $('#st-modes').style.fontSize='14px';
+    // Distribution bars
+    const box=$('#stats-modes');
+    box.innerHTML='';
+    const MODE_LABELS={random:'Aleatoria',passphrase:'Passphrase',pattern:'Patrón',pronounceable:'Pronunciable',wifi:'WiFi',pin:'PIN'};
+    const MODE_COLORS={random:'#6366f1',passphrase:'#22d3ee',pattern:'#ec4899',pronounceable:'#f59e0b',wifi:'#22c55e',pin:'#f97316'};
+    const total=S.stats.total||1;
+    for(const m of Object.keys(S.stats.modes)){
+        const count=S.stats.modes[m];
+        const pct=(count/total)*100;
+        const row=document.createElement('div');
+        row.innerHTML=`<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--text2);text-transform:capitalize;">${MODE_LABELS[m]||m}</span><span style="color:var(--text3);font-family:var(--mono);">${count}</span></div><div style="height:6px;background:var(--bg-input);border-radius:10px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:${MODE_COLORS[m]||'var(--accent)'};border-radius:10px;transition:width .4s;"></div></div>`;
+        box.appendChild(row);
+    }
+    if(!Object.keys(S.stats.modes).length)box.innerHTML='<p style="font-size:13px;color:var(--text3);text-align:center;">Genera contraseñas para ver tus estadísticas</p>';
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown',e=>{
+    if(e.target.tagName==='INPUT')return;
+    if(e.code==='Space'){e.preventDefault();gen();}
+    if(e.key==='c'&&!e.ctrlKey&&!e.metaKey)copyPw();
+    if(e.key>='1'&&e.key<='6'){
+        const modes=['random','passphrase','pattern','pronounceable','wifi','pin'];
+        switchMode(modes[+e.key-1]);
+    }
+    if((e.ctrlKey||e.metaKey)&&e.key==='c'&&!window.getSelection().toString()){
+        e.preventDefault();copyPw();
+    }
+});
+
+// ===== CSS ANIMATION FOR SPIN =====
+const style=document.createElement('style');
+style.textContent='@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}';
+document.head.appendChild(style);
+
+// ===== COOKIE CONSENT =====
+function showBanner(){const b=$('#cookie-banner');if(b)b.classList.remove('hidden');}
+function hideBanner(){const b=$('#cookie-banner');if(b)b.classList.add('hidden');}
+// Detecta si una CMP certificada (TCF IAB, GPP, Funding Choices, Osano, etc.)
+// toma el control del consentimiento. Si existe, el banner manual NO debe mostrarse
+// para evitar el doble aviso al usuario.
+function detectCMP(){
+    return !!(window.__tcfapi || window.__cmp || window.__gpp || window.gppds ||
+              window.Osano || window.fc || window.__gcms ||
+              document.querySelector('iframe[src*="consent"],[data-cmp],[id*="consent-banner"]'));
+}
+// Carga AdSense SOLO tras consentimiento 'accepted'. Cuando tengas tus datos reales,
+// descomenta la línea del ins en el slot y esta función inyectará el script.
+function enableAds(){
+    window.__adsEnabled=true;
+    // Descomenta cuando estés listo (con tus datos reales ca-pub-XXXX):
+    // const s=document.createElement('script');
+    // s.async=true; s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX';
+    // s.crossOrigin='anonymous'; document.head.appendChild(s);
+}
+function setConsent(v){
+    try{localStorage.setItem('sp_cookie_consent',v);}catch(e){}
+    hideBanner();
+    if(v==='accepted')enableAds();
+}
+function initConsent(){
+    // Si una CMP certificada está activa, deja que ella gestione el consentimiento.
+    if(detectCMP()){hideBanner();return;}
+    let c=null;
+    try{c=localStorage.getItem('sp_cookie_consent');}catch(e){}
+    if(c==='accepted'){hideBanner();enableAds();}
+    else if(c==='rejected'){hideBanner();}
+    else{showBanner();}
+    // Las CMP cargan de forma asíncrona: si aparece después, ocultamos nuestro banner.
+    setTimeout(()=>{if(detectCMP())hideBanner();},800);
+}
+
+// ===== INIT =====
+renderHist();
+gen();
+initConsent();
+
+// Netlify badge: script COMENTADO (el badge es server-side, no se puede eliminar desde el cliente)
+// (function(){
+//     function hideNetlifyBadge(root){
+//         root.querySelectorAll('iframe').forEach(function(f){
+//             if(f.src && f.src.indexOf('netlify')!==-1){
+//                 f.closest('[class],[id],[style]') ?
+//                     f.closest('[class],[id],[style]').remove() : f.remove();
+//             }
+//         });
+//         root.querySelectorAll('[class*="netlify"],[id*="netlify"],[data-testid*="netlify"]').forEach(function(el){
+//             el.remove();
+//         });
+//     }
+//     hideNetlifyBadge(document);
+//     var obs = new MutationObserver(function(muts){
+//         muts.forEach(function(m){
+//             m.addedNodes.forEach(function(n){
+//                 if(n.nodeType!==1) return;
+//                 if(n.tagName==='IFRAME' && n.src && n.src.indexOf('netlify')!==-1){
+//                     n.closest('[class],[id],[style]') ?
+//                         n.closest('[class],[id],[style]').remove() : n.remove();
+//                 }
+//                 if(n.querySelectorAll) hideNetlifyBadge(n);
+//                 var cls = (n.className||'').toString();
+//                 var id  = (n.id||'').toString();
+//                 if(cls.indexOf('netlify')!==-1 || id.indexOf('netlify')!==-1) n.remove();
+//             });
+//         });
+//     });
+//     obs.observe(document.body, {childList:true, subtree:true});
+//     setTimeout(function(){ obs.disconnect(); }, 10000);
+// })();
+</script>
+</body>
+</html>

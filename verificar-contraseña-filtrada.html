@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="DL6VMhbNCvGZDW0pjC1EbN6fWCsn5TVWNrxBwilesyI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo saber si mi contraseña ha sido filtrada (y qué hacer) | 2026</title>
+    <meta name="description" content="Aprende a comprobar si tu contraseña ha sido filtrada en una brecha de seguridad usando Have I Been Pwned. Explicación de la k-anonimidad y qué hacer si tu contraseña aparece.">
+    <meta name="keywords" content="contraseña filtrada, comprobar contraseña, have i been pwned, brecha de seguridad, k-anonimidad, contraseña hackeada, filtración de datos">
+    <meta name="author" content="PGOsecure">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pgosecure.netlify.app/verificar-contraseña-filtrada.html">
+    <meta property="og:title" content="Cómo saber si mi contraseña ha sido filtrada (y qué hacer)">
+    <meta property="og:description" content="Comprueba gratis si tu contraseña aparece en alguna brecha de seguridad conocida. Método seguro con k-anonimidad — tu contraseña nunca sale de tu navegador.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://pgosecure.netlify.app/verificar-contraseña-filtrada.html">
+    <meta property="og:image" content="https://pgosecure.netlify.app/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cómo saber si mi contraseña ha sido filtrada">
+    <meta name="twitter:description" content="Guía paso a paso con k-anonimidad para comprobar brechas de seguridad sin exponer tu contraseña.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context":"https://schema.org",
+        "@type":"Article",
+        "headline":"Cómo saber si mi contraseña ha sido filtrada (y qué hacer)",
+        "description":"Guía completa para comprobar si tu contraseña ha sido filtrada usando Have I Been Pwned y k-anonimidad.",
+        "author":{"@type":"Person","name":"PGOsecure"},
+        "publisher":{"@type":"Organization","name":"PGOsecure","url":"https://pgosecure.netlify.app/"},
+        "mainEntityOfPage":{"@type":"WebPage","@id":"https://pgosecure.netlify.app/verificar-contraseña-filtrada.html"},
+        "datePublished":"2026-09-05",
+        "dateModified":"2026-09-05",
+        "image":"https://pgosecure.netlify.app/og-image.png"
+    }
+    </script>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #05080f; --bg2: #0b1220; --bg3: #111a2b; --bg-input: #0f1729;
+            --text: #e9eef7; --text2: #96a3bb; --text3: #5d6b85;
+            --accent: #6366f1; --accent2: #9aa6ff; --accent-glow: rgba(99,102,241,0.35);
+            --success: #34d399; --success-glow: rgba(52,211,153,0.25);
+            --warning: #fbbf24; --danger: #f87171;
+            --cyan: #22d3ee; --orange: #fb923c;
+            --border: rgba(148,163,184,0.09); --border2: rgba(148,163,184,0.18);
+            --r: 16px; --r2: 12px; --r3: 10px; --shadow: 0 12px 40px rgba(0,0,0,0.55); --shadow-sm: 0 4px 16px rgba(0,0,0,0.35);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+        .light { color-scheme: light; --bg:#f5f7fb; --bg2:#ffffff; --bg3:#eef1f8; --bg-input:#edf1f9; --text:#0d1424; --text2:#465470; --text3:#8b98b0; --accent:#4f46e5; --accent2:#6359e0; --accent-glow:rgba(79,70,229,0.16); --success:#059669; --success-glow:rgba(5,150,105,0.18); --warning:#d97706; --danger:#dc2626; --cyan:#0891b2; --border:rgba(13,20,36,0.07); --border2:rgba(13,20,36,0.14); --shadow:0 12px 40px rgba(13,20,36,0.10); --shadow-sm:0 4px 16px rgba(13,20,36,0.06); }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;overflow-x:hidden;}
+        body::before{content:'';position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent) 0%,var(--cyan) 50%,var(--success) 100%);z-index:300;pointer-events:none;}
+        ::selection{background:var(--accent);color:#fff;}
+        .wrap{max-width:720px;margin:0 auto;padding:28px 16px 80px;}
+        .breadcrumb{font-size:13px;color:var(--text3);margin-bottom:18px;}
+        .breadcrumb a{color:var(--accent2);text-decoration:none;}
+        .breadcrumb a:hover{text-decoration:underline;}
+        .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);margin-bottom:20px;animation:fadeUp .5s ease;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+        .article-meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--text3);margin-bottom:18px;flex-wrap:wrap;}
+        .article-meta span{display:inline-flex;align-items:center;gap:4px;}
+        .article-meta svg{width:14px;height:14px;}
+        h1{font-size:clamp(26px,4.5vw,34px);font-weight:900;line-height:1.2;margin-bottom:12px;letter-spacing:-0.02em;}
+        .lead{font-size:16px;color:var(--text2);line-height:1.7;margin-bottom:24px;}
+        h2{font-size:20px;font-weight:800;margin:32px 0 12px;letter-spacing:-0.01em;}
+        h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--text);}
+        p{font-size:15px;color:var(--text2);line-height:1.75;margin-bottom:14px;}
+        p strong{color:var(--text);}
+        ul,ol{margin:0 0 14px 22px;}
+        li{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:6px;}
+        li strong{color:var(--text);}
+        code{background:var(--bg-input);border:1px solid var(--border2);border-radius:6px;padding:1px 6px;font-family:var(--mono);font-size:13px;color:var(--accent2);}
+        .callout{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-left:4px solid var(--success);border-radius:0 var(--r2) var(--r2) 0;padding:16px 20px;margin:20px 0;}
+        .callout p{margin:0;color:var(--text2);font-size:14px;}
+        .callout strong{color:var(--text);}
+        .callout-warn{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-left:4px solid var(--warning);border-radius:0 var(--r2) var(--r2) 0;padding:16px 20px;margin:20px 0;}
+        .callout-warn p{margin:0;color:var(--text2);font-size:14px;}
+        .callout-warn strong{color:var(--text);}
+        .callout-danger{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-left:4px solid var(--danger);border-radius:0 var(--r2) var(--r2) 0;padding:16px 20px;margin:20px 0;}
+        .callout-danger p{margin:0;color:var(--text2);font-size:14px;}
+        .callout-danger strong{color:var(--text);}
+        .cta-box{background:linear-gradient(135deg,var(--bg3),var(--bg-input));border:1px solid var(--border2);border-radius:var(--r2);padding:24px;text-align:center;margin:28px 0;}
+        .cta-box h3{margin-top:0;color:var(--text);}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:50px;background:linear-gradient(135deg,var(--accent) 0%,var(--cyan) 120%);color:#fff;text-decoration:none;font-weight:700;font-size:14px;transition:all .2s;box-shadow:0 4px 20px var(--accent-glow);}
+        .btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px var(--accent-glow);}
+        .btn svg{width:18px;height:18px;}
+        .btn-danger{background:var(--danger);box-shadow:0 4px 20px rgba(239,68,68,0.3);}
+        .btn-danger:hover{background:#dc2626;}
+        table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+        th,td{border:1px solid var(--border2);padding:10px 14px;text-align:left;}
+        th{background:var(--bg-input);color:var(--text);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;}
+        td{color:var(--text2);}
+        .tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:.3px;}
+        .tag-ok{background:rgba(34,197,94,0.12);color:var(--success);border:1px solid rgba(34,197,94,0.2);}
+        .tag-bad{background:rgba(239,68,68,0.12);color:var(--danger);border:1px solid rgba(239,68,68,0.2);}
+        .tag-mid{background:rgba(245,158,11,0.12);color:var(--warning);border:1px solid rgba(245,158,11,0.2);}
+        .steps{counter-reset:step;list-style:none;padding:0;margin:0 0 20px;}
+        .steps li{counter-increment:step;position:relative;padding-left:48px;margin-bottom:16px;font-size:15px;color:var(--text2);line-height:1.7;}
+        .steps li::before{content:counter(step);position:absolute;left:0;top:0;width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+        .steps li strong{color:var(--text);}
+        .related{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+        .related h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:12px;}
+        .related a{display:block;padding:10px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);color:var(--text2);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:8px;transition:border-color .2s;}
+        .related a:hover{border-color:var(--accent);color:var(--text);}
+        .footer{text-align:center;padding:28px 20px;color:var(--text3);font-size:12px;border-top:1px solid var(--border);}
+        .footer a{color:var(--accent2);text-decoration:none;}
+        @media(max-width:520px){.card{padding:22px;} h1{font-size:26px;} table{font-size:13px;}}
+        /* === NETLIFY BADGE — tema oscuro === */
+        .netlify-badge,
+        a[href*="netlify.com"][href*="badge"],
+        a[rel="noopener"][href*="netlify"],
+        .snip-a05640a737982,
+        [data-testid="netlify-badge"]{
+            background: var(--bg2) !important;
+            color: var(--text2) !important;
+            border: 1px solid var(--border2) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+            font-family: var(--font) !important;
+        }
+        .netlify-badge:hover,
+        a[href*="netlify.com"][href*="badge"]:hover,
+        a[rel="noopener"][href*="netlify"]:hover,
+        .snip-a05640a737982:hover,
+        [data-testid="netlify-badge"]:hover{
+            background: var(--bg3) !important;
+            color: var(--text) !important;
+            border-color: var(--accent) !important;
+        }
+        .netlify-badge img,
+        a[href*="netlify.com"] img,
+        .snip-a05640a737982 img,
+        [data-testid="netlify-badge"] img{
+            filter: brightness(0) invert(1) !important;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <nav class="breadcrumb"><a href="index.html">&larr; Generador</a> &nbsp;/&nbsp; Guías</nav>
+
+    <article class="card">
+        <div class="article-meta">
+            <span><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> 9 min lectura</span>
+            <span><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg> 5 septiembre 2026</span>
+            <span>Por PGOsecure</span>
+        </div>
+
+        <h1>Cómo saber si mi contraseña ha sido filtrada</h1>
+        <p class="lead">Cada vez que se filtra una base de datos (LinkedIn, Adobe, Twitter…), millones de contraseñas quedan expuestas. Si tu contraseña aparece en esas listas, cualquier persona puede usarla para acceder a tus cuentas. Aprende a comprobarlo de forma segura <strong>sin que tu contraseña salga nunca de tu navegador</strong>.</p>
+
+        <h2>¿Qué es una filtración de contraseñas?</h2>
+        <p>Una <strong>filtración</strong> (o brecha de seguridad) ocurre cuando un hacker obtiene la base de datos de usuarios de un servicio. Esas contraseñas se publican en foros de la dark web, se venden o se filtran abiertamente. Si reutilizas la misma contraseña en varios sitios, una sola filtración puede comprometer <strong>todas tus cuentas</strong>.</p>
+
+        <div class="callout-warn">
+            <p>⚠️ <strong>Dato real:</strong> en 2024 se filtraron más de <strong>14.000 millones</strong> de contraseñas. El 80% de los usuarios reutilizan la misma contraseña en múltiples servicios.</p>
+        </div>
+
+        <h2>¿Qué es Have I Been Pwned (HIBP)?</h2>
+        <p><strong>Have I Been Pwned</strong> es una base de datos gratuita y pública creada por el experto en seguridad <strong>Troy Hunt</strong>. Recopila contraseñas filtradas de miles de brechas conocidas y permite comprobar si la tuya aparece. Es la herramienta más utilizada por profesionales de ciberseguridad.</p>
+        <ul>
+            <li><strong>Más de 900</strong> filtraciones indexadas.</li>
+            <li><strong>Miles de millones</strong> de contraseñas comprometidas.</li>
+            <li>Actualizada constantemente con nuevos datasets.</li>
+            <li><strong>100% gratuita</strong> y sin necesidad de registro.</li>
+        </ul>
+
+        <h2>¿Cómo funciona la verificación? (k-anonimidad)</h2>
+        <p>Puede parecer contradictorio: "¿cómo comprobar mi contraseña sin enviarla?" La respuesta es un protocolo llamado <strong>k-anonimidad</strong>, y así funciona:</p>
+        <ol class="steps">
+            <li><strong>Tu contraseña se convierte en un hash SHA-1 localmente</strong> en tu navegador. Por ejemplo, la contraseña <code>password</code> se convierte en <code>5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8</code>. Este cálculo ocurre 100% en tu dispositivo.</li>
+            <li><strong>Se envían solo los 5 primeros caracteres</strong> del hash (por ejemplo, <code>5BAA6</code>) al servidor de HIBP. Tu contraseña completa y su hash completo <strong>nunca salen de tu navegador</strong>.</li>
+            <li><strong>HIBP devuelve una lista de hashes</strong> que empiezan por esos mismos 5 caracteres. Son miles de hashes, y el tuyo está ahí mezclado con otros. El servidor no sabe cuál es tuyo.</li>
+            <li><strong>Tu navegador compara localmente</strong> tu hash completo con la lista recibida. Si aparece, la contraseña ha sido filtrada. Si no, está segura (por ahora).</li>
+        </ol>
+
+        <div class="callout">
+            <p>🔒 <strong>Es 100% seguro.</strong> Ni HIBP ni ningún servidor recibe tu contraseña ni su hash completo. La k-anonimidad garantiza que tu consulta sea indistinguible de las de otros miles de usuarios.</p>
+        </div>
+
+        <h2>Comprueba tu contraseña ahora — gratis y seguro</h2>
+        <p>Nuestro generador incluye un verificador integrado basado en HIBP con k-anonimidad. Escribe tu contraseña, se comprobará al instante y <strong>se borrará automáticamente del campo tras la consulta</strong>.</p>
+
+        <div class="cta-box">
+            <h3>¿Tu contraseña ha sido filtrada?</h3>
+            <p style="margin-bottom:16px;">Comprobación instantánea · k-anonimidad · Sin enviar tu contraseña</p>
+            <a class="btn btn-danger" href="index.html#check-card"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg> Comprobar contraseña</a>
+        </div>
+
+        <h2>¿Y si mi contraseña aparece? Pasos a seguir</h2>
+        <ol class="steps">
+            <li><strong>Cámbiala inmediatamente.</strong> Ve al servicio comprometido y establece una contraseña nueva. Si reutilizas esa contraseña en otros sitios, cámbiala en <strong>todos</strong>.</li>
+            <li><strong>Activa autenticación de dos factores (2FA).</strong> Aunque alguien tenga tu contraseña, no podrá acceder sin el segundo factor (app authenticator, SMS, clave de seguridad).</li>
+            <li><strong>Usa un generador para crear una contraseña nueva.</strong> No vuelvas a crear una contraseña "en tu cabeza". Usa <a href="index.html">nuestro generador</a> con 16+ caracteres aleatorios o una passphrase de 5-6 palabras.</li>
+            <li><strong>Registra un gestor de contraseñas.</strong> Bitwarden (gratis), 1Password o KeePass te permiten tener una contraseña única y fuerte por cada servicio sin tener que memorizarlas.</li>
+            <li><strong>Monitoriza tu correo.</strong> Añade tu email en <a href="https://haveibeenpwned.com" target="_blank" rel="noopener">haveibeenpwned.com</a> para recibir alertas cuando aparezca en nuevas filtraciones.</li>
+        </ol>
+
+        <div class="callout-danger">
+            <p>🚨 <strong>Nunca ignores una filtración.</strong> Si tu contraseña aparece una vez, los atacantes la probarán en decenas de servicios. Un cambio inmediato es la única defensa.</p>
+        </div>
+
+        <h2>¿Es seguro comprobar contraseñas online?</h2>
+        <p><strong>Sí, pero solo si el sitio usa k-anonimidad.</strong> Herramientas que te piden escribir tu contraseña y la envían completa a un servidor son <strong>peligrosas</strong> — podrían estar recopilándola.</p>
+        <table>
+            <tr><th>Método</th><th>Seguro</th><th>Por qué</th></tr>
+            <tr><td>K-anonimidad (HIBP)</td><td><span class="tag tag-ok">Sí</span></td><td>Solo se envían 5 chars del hash; tu contraseña nunca sale del navegador</td></tr>
+            <tr><td>Sitio que pide la contraseña completa</td><td><span class="tag tag-bad">No</span></td><td>Tu contraseña se transmite y podría ser almacenada</td></tr>
+            <tr><td>Extensión de navegador no verificada</td><td><span class="tag tag-mid">Depende</span></td><td>Algunas extensiones acceden a todo lo que escribes</td></tr>
+        </table>
+
+        <div class="callout">
+            <p>💡 <strong>Consejo:</strong> si alguna vez dudas, comprueba la conexión HTTPS (candado en la barra de direcciones) y busca que el servicio mencione explícitamente el uso de k-anonimidad o la API de HIBP.</p>
+        </div>
+
+        <h2>Preguntas frecuentes</h2>
+        <h3>¿Cada cuánto debo comprobar mis contraseñas?</h3>
+        <p>Lo ideal es hacerlo <strong>cada 2-3 meses</strong> o siempre que recibas una alerta de HIBP. También es bueno comprobarlas tras una noticia de filtración importante.</p>
+        <h3>¿Qué pasa si mi contraseña no aparece?</h3>
+        <p>Significa que <strong>no se ha encontrado en las filtraciones indexadas hasta ahora</strong>. Pero no es garantía de seguridad para siempre — sigue siendo esencial usar contraseñas largas y únicas.</p>
+        <h3>¿Puedo comprobar emails también?</h3>
+        <p>Sí. En <a href="https://haveibeenpwned.com" target="_blank" rel="noopener">haveibeenpwned.com</a> puedes introducir tu email para ver en qué filtraciones aparece tu cuenta (no tus contraseñas, sino los servicios comprometidos).</p>
+        <h3>¿Mis contraseñas generadas aquí son seguras?</h3>
+        <p>Sí. Se generan con <strong>Web Crypto API</strong> (cryptography segura del navegador) y nunca salen de tu dispositivo. Las contraseñas de los generadores online que envían resultados a un servidor no son fiables.</p>
+
+        <div class="related">
+            <h3>Guías relacionadas</h3>
+            <a href="como-crear-contraseña-segura.html">→ Cómo crear una contraseña segura en 2026</a>
+            <a href="que-es-passphrase.html">→ Qué es un passphrase y por qué es más seguro que una contraseña</a>
+            <a href="index.html">→ Generador de contraseñas — crea la tuya ahora</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>&copy; 2026 PGOsecure &mdash; pgosecure.netlify.app</p>
+        <p style="margin-top:6px;"><a href="aviso-legal.html">Aviso Legal</a> &middot; <a href="politica-privacidad.html">Política de Privacidad</a> &middot; <a href="politica-cookies.html">Política de Cookies</a></p>
+    </footer>
+</div>
+<script>try{ if(localStorage.getItem('sp_theme')==='light') document.body.classList.add('light'); }catch(e){}</script>
+<script>
+(function(){
+    function hideBadge(r){
+        r.querySelectorAll('iframe').forEach(function(f){if(f.src&&f.src.indexOf('netlify')!==-1){var c=f.closest('[class],[id],[style]');c?c.remove():f.remove();}});
+        r.querySelectorAll('[class*="netlify"],[id*="netlify"],[data-testid*="netlify"]').forEach(function(e){e.remove();});
+    }
+    hideBadge(document);
+    var o=new MutationObserver(function(m){m.forEach(function(x){x.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==='IFRAME'&&n.src&&n.src.indexOf('netlify')!==-1){var c=n.closest('[class],[id],[style]');c?c.remove():n.remove();}if(n.querySelectorAll)hideBadge(n);var cls=(n.className||'').toString();var id=(n.id||'').toString();if(cls.indexOf('netlify')!==-1||id.indexOf('netlify')!==-1)n.remove();});});});
+    o.observe(document.body,{childList:true,subtree:true});
+    setTimeout(function(){o.disconnect();},10000);
+})();
+</script>
+</body>
+</html>

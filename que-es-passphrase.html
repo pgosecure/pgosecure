@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="DL6VMhbNCvGZDW0pjC1EbN6fWCsn5TVWNrxBwilesyI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qué es un passphrase y por qué es más seguro que una contraseña</title>
+    <meta name="description" content="Descubre qué es una passphrase, cómo se diferencia de una contraseña normal y por qué es la forma más segura y fácil de recordar de proteger tus cuentas. Ejemplos reales.">
+    <meta name="keywords" content="qué es un passphrase, passphrase, frase de contraseña, contraseña de palabras, seguridad contraseñas, contrastraseña memorable">
+    <meta name="author" content="PGOsecure">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pgosecure.netlify.app/que-es-passphrase.html">
+    <meta property="og:title" content="Qué es un passphrase y por qué es más seguro que una contraseña">
+    <meta property="og:description" content="La guía completa del passphrase: definición, ventajas frente a la contraseña tradicional y cómo crear uno.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://pgosecure.netlify.app/que-es-passphrase.html">
+    <meta property="og:image" content="https://pgosecure.netlify.app/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Qué es un passphrase y por qué es más seguro">
+    <meta name="twitter:description" content="Definición, ventajas y ejemplos de passphrases seguras.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context":"https://schema.org",
+        "@type":"Article",
+        "headline":"Qué es un passphrase y por qué es más seguro que una contraseña",
+        "description":"Guía completa sobre passphrases: definición, ventajas frente a contraseñas tradicionales y ejemplos.",
+        "author":{"@type":"Person","name":"PGOsecure"},
+        "publisher":{"@type":"Organization","name":"PGOsecure","url":"https://pgosecure.netlify.app/"},
+        "mainEntityOfPage":{"@type":"WebPage","@id":"https://pgosecure.netlify.app/que-es-passphrase.html"},
+        "datePublished":"2026-09-05",
+        "dateModified":"2026-09-05",
+        "image":"https://pgosecure.netlify.app/og-image.png"
+    }
+    </script>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #05080f; --bg2: #0b1220; --bg3: #111a2b; --bg-input: #0f1729;
+            --text: #e9eef7; --text2: #96a3bb; --text3: #5d6b85;
+            --accent: #6366f1; --accent2: #9aa6ff; --accent-glow: rgba(99,102,241,0.35);
+            --success: #34d399; --success-glow: rgba(52,211,153,0.25);
+            --warning: #fbbf24; --danger: #f87171;
+            --cyan: #22d3ee; --orange: #fb923c;
+            --border: rgba(148,163,184,0.09); --border2: rgba(148,163,184,0.18);
+            --r: 16px; --r2: 12px; --r3: 10px; --shadow: 0 12px 40px rgba(0,0,0,0.55); --shadow-sm: 0 4px 16px rgba(0,0,0,0.35);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+        .light { color-scheme: light; --bg:#f5f7fb; --bg2:#ffffff; --bg3:#eef1f8; --bg-input:#edf1f9; --text:#0d1424; --text2:#465470; --text3:#8b98b0; --accent:#4f46e5; --accent2:#6359e0; --accent-glow:rgba(79,70,229,0.16); --success:#059669; --success-glow:rgba(5,150,105,0.18); --warning:#d97706; --danger:#dc2626; --cyan:#0891b2; --border:rgba(13,20,36,0.07); --border2:rgba(13,20,36,0.14); --shadow:0 12px 40px rgba(13,20,36,0.10); --shadow-sm:0 4px 16px rgba(13,20,36,0.06); }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;overflow-x:hidden;}
+        body::before{content:'';position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent) 0%,var(--cyan) 50%,var(--success) 100%);z-index:300;pointer-events:none;}
+        ::selection{background:var(--accent);color:#fff;}
+        .wrap{max-width:720px;margin:0 auto;padding:28px 16px 80px;}
+        .breadcrumb{font-size:13px;color:var(--text3);margin-bottom:18px;}
+        .breadcrumb a{color:var(--accent2);text-decoration:none;}
+        .breadcrumb a:hover{text-decoration:underline;}
+        .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);margin-bottom:20px;animation:fadeUp .5s ease;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+        .article-meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--text3);margin-bottom:18px;flex-wrap:wrap;}
+        .article-meta span{display:inline-flex;align-items:center;gap:4px;}
+        .article-meta svg{width:14px;height:14px;}
+        h1{font-size:clamp(26px,4.5vw,34px);font-weight:900;line-height:1.2;margin-bottom:12px;letter-spacing:-0.02em;}
+        .lead{font-size:16px;color:var(--text2);line-height:1.7;margin-bottom:24px;}
+        h2{font-size:20px;font-weight:800;margin:32px 0 12px;letter-spacing:-0.01em;}
+        h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--text);}
+        p{font-size:15px;color:var(--text2);line-height:1.75;margin-bottom:14px;}
+        p strong{color:var(--text);}
+        ul,ol{margin:0 0 14px 22px;}
+        li{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:6px;}
+        li strong{color:var(--text);}
+        code{background:var(--bg-input);border:1px solid var(--border2);border-radius:6px;padding:1px 6px;font-family:var(--mono);font-size:13px;color:var(--accent2);}
+        .callout{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-left:4px solid var(--success);border-radius:0 var(--r2) var(--r2) 0;padding:16px 20px;margin:20px 0;}
+        .callout p{margin:0;color:var(--text2);font-size:14px;}
+        .callout strong{color:var(--text);}
+        .cta-box{background:linear-gradient(135deg,var(--bg3),var(--bg-input));border:1px solid var(--border2);border-radius:var(--r2);padding:24px;text-align:center;margin:28px 0;}
+        .cta-box h3{margin-top:0;color:var(--text);}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:50px;background:linear-gradient(135deg,var(--accent) 0%,var(--cyan) 120%);color:#fff;text-decoration:none;font-weight:700;font-size:14px;transition:all .2s;box-shadow:0 4px 20px var(--accent-glow);}
+        .btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px var(--accent-glow);}
+        .btn svg{width:18px;height:18px;}
+        table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+        th,td{border:1px solid var(--border2);padding:10px 14px;text-align:left;}
+        th{background:var(--bg-input);color:var(--text);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;}
+        td{color:var(--text2);}
+        .related{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+        .related h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:12px;}
+        .related a{display:block;padding:10px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);color:var(--text2);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:8px;transition:border-color .2s;}
+        .related a:hover{border-color:var(--accent);color:var(--text);}
+        .footer{text-align:center;padding:28px 20px;color:var(--text3);font-size:12px;border-top:1px solid var(--border);}
+        .footer a{color:var(--accent2);text-decoration:none;}
+        .example{font-family:var(--mono);font-size:14px;color:var(--accent2);background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r3);padding:12px 16px;margin:10px 0;word-break:break-all;}
+        @media(max-width:520px){.card{padding:22px;} h1{font-size:26px;} table{font-size:13px;}}
+        /* === NETLIFY BADGE — tema oscuro === */
+        .netlify-badge,
+        a[href*="netlify.com"][href*="badge"],
+        a[rel="noopener"][href*="netlify"],
+        .snip-a05640a737982,
+        [data-testid="netlify-badge"]{
+            background: var(--bg2) !important;
+            color: var(--text2) !important;
+            border: 1px solid var(--border2) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+            font-family: var(--font) !important;
+        }
+        .netlify-badge:hover,
+        a[href*="netlify.com"][href*="badge"]:hover,
+        a[rel="noopener"][href*="netlify"]:hover,
+        .snip-a05640a737982:hover,
+        [data-testid="netlify-badge"]:hover{
+            background: var(--bg3) !important;
+            color: var(--text) !important;
+            border-color: var(--accent) !important;
+        }
+        .netlify-badge img,
+        a[href*="netlify.com"] img,
+        .snip-a05640a737982 img,
+        [data-testid="netlify-badge"] img{
+            filter: brightness(0) invert(1) !important;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <nav class="breadcrumb"><a href="index.html">&larr; Generador</a> &nbsp;/&nbsp; Guías</nav>
+
+    <article class="card">
+        <div class="article-meta">
+            <span><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> 7 min lectura</span>
+            <span><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg> 5 septiembre 2026</span>
+            <span>Por PGOsecure</span>
+        </div>
+
+        <h1>Qué es un passphrase y por qué es más seguro que una contraseña</h1>
+        <p class="lead">Si te cuesta recordar contraseñas con símbolos raros, hay una forma mejor: el <strong>passphrase</strong>, una frase de varias palabras fáciles de recordar y, a la vez, muchísimo más difícil de hackear que tu contraseña actual.</p>
+
+        <h2>Definición de passphrase</h2>
+        <p>Un <strong>passphrase</strong> (frase de contraseña) es una secuencia de varias palabras —generalmente entre 4 y 7— unidas por guiones o espacios. En lugar de combinar caracteres sin sentido, se combinan <em>palabras</em> que tienen significado para ti.</p>
+        <div class="example">luna-libro-tren-montana-verano</div>
+        <p>Esta frase es más fácil de memorizar que <code>K7&pQw2!zL</code> y, como veremos, <strong>también más segura</strong>.</p>
+
+        <h2>Contraseña normal vs passphrase</h2>
+        <table>
+            <tr><th>Contraseña</th><th>Passphrase</th></tr>
+            <tr><td><code>K7&pQw2!zL</code></td><td><code>gato-azul-mesa-viaje-2026</code></td></tr>
+            <tr><td>10 caracteres al azar</td><td>28+ caracteres de palabras reales</td></tr>
+            <tr><td>Difícil de memorizar</td><td>Fácil de recordar</td></tr>
+            <tr><td>~70 bits de entropía</td><td>80-100+ bits de entropía</td></tr>
+        </table>
+
+        <h2>¿Por qué un passphrase es más seguro?</h2>
+        <p>Va contra la intuición, pero la <strong>longitud</strong> pesa más que la "complejidad". Cada palabra añade 10-15 bits de entropía de forma predecible:</p>
+        <ul>
+            <li><strong>1 palabra</strong> ~12 bits — trivial</li>
+            <li><strong>3 palabras</strong> ~36 bits — vulnerable</li>
+            <li><strong>5 palabras</strong> ~60 bits — aceptable</li>
+            <li><strong>6-7 palabras y un número</strong> ~80-100 bits — ultra segura</li>
+        </ul>
+        <p>Y la entropía es lo que de verdad cuenta: los atacantes prueban millones de combinaciones por segundo, y cada bit multiplica el tiempo necesario.</p>
+
+        <div class="callout">
+            <p>💡 <strong>Un ejemplo real:</strong> <code>correct-horse-battery-staple</code> es famosa porque se citó en un cómic de xkcd. Cuatro palabras cotidianas en español (<code>rio-arbol-nube-casa</code>) funcionan igual de bien si son aleatorias y no predecibles para alguien que te conoce.</p>
+        </div>
+
+        <h2>El error que todo el mundo comete</h2>
+        <p>Lo importante es que las palabras sean <strong>aleatorias</strong>. Una frase como <em>"mi-perro-azul-2020"</em> es débil porque la puede adivinar quien conozca tu perro. Por eso lo mejor es que las elija un programa mediante criptografía segura, no tu cabeza.</p>
+
+        <h2>Crea tu passphrase en segundos</h2>
+        <p>Nuestro generador tiene un modo <strong>Passphrase</strong> que elige palabras al azar de diccionarios en español e inglés, añade números y separador que tú elijas, y todo se computa en tu navegador.</p>
+
+        <div class="cta-box">
+            <h3>Genera una passphrase segura y memorable</h3>
+            <p style="margin-bottom:16px;">Gratis · Sin registro · Elige español o inglés</p>
+            <a class="btn" href="index.html">→ Generar passphrase</a>
+        </div>
+
+        <h2>Preguntas frecuentes</h2>
+        <h3>¿Un passphrase en español funciona igual?</h3>
+        <p>Sí. La seguridad depende del número de palabras aleatorias, no del idioma. Eso sí: cuanto más larga la palabra, mayor el diccionario efectivo.</p>
+        <h3>¿Puedo usar un passphrase para todo?</h3>
+        <p>Para correo, bancos y redes sociales es ideal. Para cuentas sin peso (foros) puedes usar contraseñas normales de 16 caracteres.</p>
+        <h3>¿Y si me piden símbolos obligatorios?</h3>
+        <p>Añade un número al final (<code>vento-raio-lago-9</code>) o una mayúscula, y cumples las reglas sin perder memorabilidad.</p>
+
+        <div class="related">
+            <h3>Guías relacionadas</h3>
+            <a href="como-crear-contraseña-segura.html">→ Cómo crear una contraseña segura en 2026</a>
+            <a href="verificar-contraseña-filtrada.html">→ Cómo saber si tu passphrase ha sido filtrada</a>
+            <a href="index.html">→ Generador de contraseñas y passphrases</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>&copy; 2026 PGOsecure &mdash; pgosecure.netlify.app</p>
+        <p style="margin-top:6px;"><a href="aviso-legal.html">Aviso Legal</a> &middot; <a href="politica-privacidad.html">Política de Privacidad</a> &middot; <a href="politica-cookies.html">Política de Cookies</a></p>
+    </footer>
+</div>
+<script>try{ if(localStorage.getItem('sp_theme')==='light') document.body.classList.add('light'); }catch(e){}</script>
+<script>
+(function(){
+    function hideBadge(r){
+        r.querySelectorAll('iframe').forEach(function(f){if(f.src&&f.src.indexOf('netlify')!==-1){var c=f.closest('[class],[id],[style]');c?c.remove():f.remove();}});
+        r.querySelectorAll('[class*="netlify"],[id*="netlify"],[data-testid*="netlify"]').forEach(function(e){e.remove();});
+    }
+    hideBadge(document);
+    var o=new MutationObserver(function(m){m.forEach(function(x){x.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==='IFRAME'&&n.src&&n.src.indexOf('netlify')!==-1){var c=n.closest('[class],[id],[style]');c?c.remove():n.remove();}if(n.querySelectorAll)hideBadge(n);var cls=(n.className||'').toString();var id=(n.id||'').toString();if(cls.indexOf('netlify')!==-1||id.indexOf('netlify')!==-1)n.remove();});});});
+    o.observe(document.body,{childList:true,subtree:true});
+    setTimeout(function(){o.disconnect();},10000);
+})();
+</script>
+</body>
+</html>
